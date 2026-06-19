@@ -13,7 +13,7 @@
     --bg:#0e0c0a; --bg2:#171410; --bg3:#1f1b16;
     --border:rgba(255,255,255,0.07); --border2:rgba(255,255,255,0.13);
     --text:#ede8df; --text2:#9a9080; --text3:#5e5648;
-    --accent1:#c8833a; --accent2:#6db89a; --accent3:#9b7ec8;
+    --accent1:#c8833a; --accent2:#6db89a;
     --alt-ok:#6db89a; --alt-warn:#c8833a; --alt-high:#e05c5c;
     --tag-bg:rgba(255,255,255,0.04); --tag-text:#7a7060;
   }
@@ -29,28 +29,34 @@
   .meta-pill span { color:var(--text2); }
 
   /* MUST-DO */
-  .mustdo-bar { max-width:820px; margin:0 auto 0; display:flex; gap:8px; flex-wrap:wrap; }
+  .mustdo-bar { max-width:820px; margin:0 auto; display:flex; gap:8px; flex-wrap:wrap; }
   .mustdo-pill { display:flex; align-items:center; gap:7px; padding:7px 14px; border-radius:100px; background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.09); font-size:12px; color:var(--text2); }
   .mustdo-pill strong { color:var(--text); font-weight:500; }
 
   /* ACCLIM BLOCK */
   .acclim-block { max-width:820px; margin:20px auto 0; border-radius:12px; overflow:hidden; border:1px solid rgba(109,184,154,0.2); }
   .acclim-header { background:rgba(109,184,154,0.08); border-bottom:1px solid rgba(109,184,154,0.15); padding:13px 20px; display:flex; align-items:center; gap:10px; cursor:pointer; user-select:none; }
-  .acclim-header-text { flex:1; }
   .acclim-title { font-size:13px; font-weight:500; color:var(--alt-ok); letter-spacing:0.02em; }
   .acclim-subtitle { font-size:11.5px; color:var(--text3); margin-top:2px; }
-  .acclim-toggle { font-size:16px; color:var(--text3); transition:transform .25s; }
+  .acclim-toggle { font-size:16px; color:var(--text3); transition:transform .25s; flex-shrink:0; }
   .acclim-toggle.open { transform:rotate(180deg); }
-  .acclim-body { display:none; padding:16px 20px 20px; background:rgba(109,184,154,0.04); }
+  .acclim-body { display:none; padding:18px 20px 22px; background:rgba(109,184,154,0.04); }
   .acclim-body.open { display:block; }
-  .acclim-rule { font-size:13px; color:var(--text2); line-height:1.7; margin-bottom:14px; padding-left:14px; border-left:2px solid rgba(109,184,154,0.3); }
+  .acclim-rule { font-size:13px; color:var(--text2); line-height:1.75; margin-bottom:14px; padding-left:14px; border-left:2px solid rgba(109,184,154,0.3); }
   .acclim-rule strong { color:var(--alt-ok); }
-  .alt-profile { display:flex; flex-wrap:wrap; gap:6px; margin-bottom:14px; }
-  .alt-chip { font-size:11px; padding:3px 10px; border-radius:100px; display:flex; align-items:center; gap:5px; }
-  .alt-chip.low  { background:rgba(109,184,154,0.1); color:var(--alt-ok);   border:1px solid rgba(109,184,154,0.2); }
-  .alt-chip.mid  { background:rgba(200,131,58,0.1);  color:var(--alt-warn); border:1px solid rgba(200,131,58,0.2); }
-  .alt-chip.high { background:rgba(224,92,92,0.1);   color:var(--alt-high); border:1px solid rgba(224,92,92,0.2); }
-  .acclim-tips { display:grid; grid-template-columns:1fr 1fr; gap:8px; }
+
+  /* Altitude progression visual */
+  .alt-sequence { display:flex; align-items:center; flex-wrap:wrap; gap:4px; margin:14px 0 18px; }
+  .alt-node { display:flex; flex-direction:column; align-items:center; gap:3px; }
+  .alt-node-dot { width:10px; height:10px; border-radius:50%; }
+  .alt-node-label { font-size:9px; color:var(--text3); white-space:nowrap; }
+  .alt-node-m { font-size:9px; font-weight:500; }
+  .alt-node-m.low { color:var(--alt-ok); }
+  .alt-node-m.mid { color:var(--alt-warn); }
+  .alt-node-m.high { color:var(--alt-high); }
+  .alt-arrow { font-size:10px; color:var(--text3); margin-bottom:12px; }
+
+  .acclim-tips { display:grid; grid-template-columns:1fr 1fr; gap:8px; margin-top:14px; }
   @media(max-width:560px){.acclim-tips{grid-template-columns:1fr}}
   .acclim-tip { font-size:12px; color:var(--text2); line-height:1.55; background:rgba(255,255,255,0.03); border-radius:8px; padding:10px 13px; border:1px solid var(--border); }
   .acclim-tip strong { color:var(--text); display:block; margin-bottom:2px; font-weight:500; }
@@ -60,33 +66,39 @@
   /* MAP */
   .map-wrapper { max-width:820px; margin:20px auto 0; border-radius:14px; overflow:hidden; border:1px solid var(--border2); position:relative; }
   #map { height:420px; width:100%; background:#111; }
-  .map-legend { position:absolute; bottom:14px; left:14px; z-index:1000; background:rgba(14,12,10,0.9); border:1px solid var(--border2); border-radius:8px; padding:10px 14px; font-size:11px; color:var(--text2); display:flex; flex-direction:column; gap:5px; backdrop-filter:blur(8px); max-height:220px; overflow-y:auto; }
+  .map-legend { position:absolute; bottom:14px; left:14px; z-index:1000; background:rgba(14,12,10,0.9); border:1px solid var(--border2); border-radius:8px; padding:10px 14px; font-size:11px; color:var(--text2); display:flex; flex-direction:column; gap:5px; backdrop-filter:blur(8px); max-height:240px; overflow-y:auto; }
   .legend-item { display:flex; align-items:center; gap:7px; white-space:nowrap; }
   .legend-dot { width:9px; height:9px; border-radius:50%; flex-shrink:0; }
 
   /* TABS */
   .tabs { max-width:820px; margin:20px auto 28px; display:flex; gap:8px; flex-wrap:wrap; }
-  .tab-btn { padding:9px 18px; border-radius:100px; border:1.5px solid var(--border2); background:transparent; color:var(--text2); font-family:'DM Sans',sans-serif; font-size:13px; cursor:pointer; transition:all .22s; }
+  .tab-btn { padding:10px 20px; border-radius:100px; border:1.5px solid var(--border2); background:transparent; color:var(--text2); font-family:'DM Sans',sans-serif; font-size:13px; cursor:pointer; transition:all .22s; }
   .tab-btn:hover { border-color:rgba(255,255,255,0.22); color:var(--text); }
   .tab-btn.t1.active { background:var(--bg3); border-color:var(--accent1); color:var(--accent1); font-weight:500; }
   .tab-btn.t2.active { background:var(--bg3); border-color:var(--accent2); color:var(--accent2); font-weight:500; }
-  .tab-btn.t3.active { background:var(--bg3); border-color:var(--accent3); color:var(--accent3); font-weight:500; }
 
   /* ITINERARY */
   .itinerary { display:none; max-width:820px; margin:0 auto; animation:fadeIn .3s ease; }
   .itinerary.active { display:block; }
   @keyframes fadeIn { from{opacity:0;transform:translateY(6px)} to{opacity:1;transform:none} }
-  .intro { font-size:13.5px; color:var(--text2); line-height:1.75; padding:16px 20px; border-radius:10px; background:var(--bg2); margin-bottom:24px; border-left:3px solid var(--border2); }
-  .it1 .intro{border-color:var(--accent1)} .it2 .intro{border-color:var(--accent2)} .it3 .intro{border-color:var(--accent3)}
-  .intro strong{color:var(--text)}
 
-  /* ALTITUDE PROGRESS BAR */
-  .alt-bar-wrap { margin-bottom:28px; }
-  .alt-bar-label { font-size:11px; color:var(--text3); margin-bottom:8px; letter-spacing:0.06em; text-transform:uppercase; }
-  .alt-bar { display:flex; align-items:flex-end; gap:3px; height:48px; }
-  .alt-seg { flex:1; border-radius:3px 3px 0 0; min-width:0; position:relative; cursor:default; transition:opacity .2s; }
-  .alt-seg:hover { opacity:0.8; }
-  .alt-seg-label { position:absolute; bottom:-18px; left:50%; transform:translateX(-50%); font-size:9px; color:var(--text3); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; max-width:60px; }
+  .intro { font-size:13.5px; color:var(--text2); line-height:1.75; padding:16px 20px; border-radius:10px; background:var(--bg2); margin-bottom:24px; border-left:3px solid var(--border2); }
+  .it1 .intro { border-color:var(--accent1); }
+  .it2 .intro { border-color:var(--accent2); }
+  .intro strong { color:var(--text); }
+
+  /* ALTITUDE PROGRESSION BANNER */
+  .alt-banner { margin-bottom:24px; padding:14px 18px; border-radius:10px; background:var(--bg2); border:1px solid var(--border); }
+  .alt-banner-title { font-size:10.5px; color:var(--text3); text-transform:uppercase; letter-spacing:0.08em; margin-bottom:10px; }
+  .alt-steps { display:flex; align-items:flex-end; gap:0; overflow-x:auto; padding-bottom:20px; }
+  .alt-step { display:flex; flex-direction:column; align-items:center; flex:1; min-width:52px; position:relative; }
+  .alt-step-bar { width:100%; border-radius:3px 3px 0 0; min-height:4px; position:relative; }
+  .alt-step-bar::after { content:''; position:absolute; bottom:-8px; left:50%; transform:translateX(-50%); width:0; height:0; }
+  .alt-step-connector { height:1px; width:100%; background:var(--border); margin-bottom:0; }
+  .alt-step-name { font-size:9.5px; color:var(--text3); text-align:center; margin-top:6px; line-height:1.3; max-width:60px; }
+  .alt-step-m { font-size:9px; font-weight:500; text-align:center; margin-top:1px; }
+  .alt-step-days { font-size:8.5px; color:var(--text3); text-align:center; }
+  .excursion-marker { position:absolute; top:-18px; left:50%; transform:translateX(-50%); font-size:9px; color:var(--alt-high); white-space:nowrap; font-weight:500; }
 
   /* TIMELINE */
   .timeline { position:relative; }
@@ -95,39 +107,39 @@
   .stop-left { flex-shrink:0; width:44px; display:flex; flex-direction:column; align-items:center; padding-top:18px; }
   .dot { width:10px; height:10px; border-radius:50%; background:var(--bg3); border:1.5px solid var(--border2); position:relative; z-index:1; }
   .dot.mustdo { width:14px; height:14px; margin-left:-2px; }
-  .it1 .dot{border-color:var(--accent1)} .it2 .dot{border-color:var(--accent2)} .it3 .dot{border-color:var(--accent3)}
-  .it1 .dot.mustdo{background:var(--accent1)} .it2 .dot.mustdo{background:var(--accent2)} .it3 .dot.mustdo{background:var(--accent3)}
+  .it1 .dot { border-color:var(--accent1); }
+  .it2 .dot { border-color:var(--accent2); }
+  .it1 .dot.mustdo { background:var(--accent1); }
+  .it2 .dot.mustdo { background:var(--accent2); }
 
   .stop-card { flex:1; background:var(--bg2); border:1px solid var(--border); border-radius:12px; padding:18px 20px; margin-bottom:10px; transition:border-color .2s; }
   .stop-card:hover { border-color:var(--border2); }
-  .it1 .stop-card.mustdo{border-color:rgba(200,131,58,0.28)} .it2 .stop-card.mustdo{border-color:rgba(109,184,154,0.28)} .it3 .stop-card.mustdo{border-color:rgba(155,126,200,0.28)}
-  .it1 .stop-card.acclim{border-color:rgba(109,184,154,0.22)} .it2 .stop-card.acclim{border-color:rgba(109,184,154,0.22)} .it3 .stop-card.acclim{border-color:rgba(109,184,154,0.22)}
+  .it1 .stop-card.mustdo { border-color:rgba(200,131,58,0.28); }
+  .it2 .stop-card.mustdo { border-color:rgba(109,184,154,0.28); }
+  .stop-card.acclim-card { border-color:rgba(109,184,154,0.2); }
 
-  .stop-header { display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:5px; gap:12px; }
+  .stop-header { display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:6px; gap:12px; }
   .stop-name { font-family:'Cormorant Garamond',serif; font-size:19px; font-weight:600; color:var(--text); line-height:1.2; }
   .stop-days { font-size:11px; font-weight:500; padding:3px 10px; border-radius:100px; white-space:nowrap; flex-shrink:0; letter-spacing:0.04em; }
-  .it1 .stop-days{background:rgba(200,131,58,0.12);color:var(--accent1);border:1px solid rgba(200,131,58,0.22)}
-  .it2 .stop-days{background:rgba(109,184,154,0.12);color:var(--accent2);border:1px solid rgba(109,184,154,0.22)}
-  .it3 .stop-days{background:rgba(155,126,200,0.12);color:var(--accent3);border:1px solid rgba(155,126,200,0.22)}
+  .it1 .stop-days { background:rgba(200,131,58,0.12); color:var(--accent1); border:1px solid rgba(200,131,58,0.22); }
+  .it2 .stop-days { background:rgba(109,184,154,0.12); color:var(--accent2); border:1px solid rgba(109,184,154,0.22); }
 
-  /* Altitude badge inline */
-  .stop-meta { display:flex; align-items:center; gap:8px; margin-bottom:10px; flex-wrap:wrap; }
+  .stop-meta { display:flex; align-items:center; gap:7px; margin-bottom:10px; flex-wrap:wrap; }
   .alt-badge { font-size:10.5px; padding:2px 9px; border-radius:100px; font-weight:500; letter-spacing:0.03em; }
   .alt-badge.low  { background:rgba(109,184,154,0.1); color:var(--alt-ok);   border:1px solid rgba(109,184,154,0.2); }
   .alt-badge.mid  { background:rgba(200,131,58,0.1);  color:var(--alt-warn); border:1px solid rgba(200,131,58,0.2); }
   .alt-badge.high { background:rgba(224,92,92,0.1);   color:var(--alt-high); border:1px solid rgba(224,92,92,0.2); }
-  .acclim-badge-sm { font-size:10px; padding:2px 9px; border-radius:100px; background:rgba(109,184,154,0.1); color:var(--alt-ok); border:1px solid rgba(109,184,154,0.2); letter-spacing:0.04em; font-weight:500; }
+  .acclim-badge-sm { font-size:10px; padding:2px 9px; border-radius:100px; background:rgba(109,184,154,0.1); color:var(--alt-ok); border:1px solid rgba(109,184,154,0.2); font-weight:500; }
   .mustdo-badge { font-size:10px; padding:2px 8px; border-radius:100px; font-weight:500; letter-spacing:0.05em; }
-  .it1 .mustdo-badge{background:rgba(200,131,58,0.15);color:var(--accent1);border:1px solid rgba(200,131,58,0.25)}
-  .it2 .mustdo-badge{background:rgba(109,184,154,0.15);color:var(--accent2);border:1px solid rgba(109,184,154,0.25)}
-  .it3 .mustdo-badge{background:rgba(155,126,200,0.15);color:var(--accent3);border:1px solid rgba(155,126,200,0.25)}
+  .it1 .mustdo-badge { background:rgba(200,131,58,0.15); color:var(--accent1); border:1px solid rgba(200,131,58,0.25); }
+  .it2 .mustdo-badge { background:rgba(109,184,154,0.15); color:var(--accent2); border:1px solid rgba(109,184,154,0.25); }
 
   /* Acclim program inside card */
   .acclim-program { margin:10px 0 12px; border-radius:8px; background:rgba(109,184,154,0.05); border:1px solid rgba(109,184,154,0.15); padding:12px 14px; }
   .acclim-program-title { font-size:11px; color:var(--alt-ok); font-weight:500; letter-spacing:0.05em; margin-bottom:8px; text-transform:uppercase; }
-  .acclim-day { font-size:12.5px; color:var(--text2); line-height:1.55; display:flex; gap:8px; margin-bottom:5px; }
+  .acclim-day { font-size:12.5px; color:var(--text2); line-height:1.55; display:flex; gap:8px; margin-bottom:6px; }
   .acclim-day:last-child { margin-bottom:0; }
-  .acclim-day-num { flex-shrink:0; font-size:10px; font-weight:500; color:var(--alt-ok); background:rgba(109,184,154,0.12); border-radius:4px; padding:1px 6px; margin-top:2px; height:fit-content; }
+  .acclim-day-num { flex-shrink:0; font-size:10px; font-weight:500; color:var(--alt-ok); background:rgba(109,184,154,0.12); border-radius:4px; padding:1px 6px; margin-top:2px; }
 
   .stop-desc { font-size:13.5px; color:var(--text2); line-height:1.7; margin-bottom:12px; }
   .stop-highlights { margin-bottom:12px; display:flex; flex-direction:column; gap:5px; }
@@ -148,7 +160,7 @@
   .popup-days{font-size:11px;color:#9a9080;margin-bottom:2px}
   .popup-alt{font-size:11px;margin-bottom:2px}
   .popup-alt.low{color:#6db89a} .popup-alt.mid{color:#c8833a} .popup-alt.high{color:#e05c5c}
-  .popup-mustdo{font-size:10px;color:#c8833a;margin-top:4px;font-weight:500;letter-spacing:0.04em}
+  .popup-mustdo{font-size:10px;color:#c8833a;margin-top:4px;font-weight:500}
   .popup-acclim{font-size:10px;color:#6db89a;margin-top:3px;font-weight:500}
 </style>
 </head>
@@ -159,7 +171,7 @@
   <h1>Pérou — <em>terres des Incas</em></h1>
   <div class="header-meta">
     <div class="meta-pill">🗓 <span>5 semaines · ~35 jours</span></div>
-    <div class="meta-pill">🏔 <span>Stratégie altitude intégrée</span></div>
+    <div class="meta-pill">🫁 <span>Acclimatation progressive intégrée</span></div>
     <div class="meta-pill">🥾 <span>Randonnée & panoramas</span></div>
     <div class="meta-pill">🍽️ <span>Gastronomie locale</span></div>
   </div>
@@ -169,46 +181,48 @@
   <div class="mustdo-pill"><span>🏛️</span><strong>Machu Picchu</strong></div>
   <div class="mustdo-pill"><span>🦅</span><strong>Canyon del Colca — Condors</strong></div>
   <div class="mustdo-pill"><span>🌈</span><strong>Vinicunca — Arc-en-ciel</strong></div>
-  <div class="mustdo-pill" style="color:var(--text3);border-color:var(--border)"><span style="font-size:10px">★</span>présents dans les 3 itinéraires</div>
+  <div class="mustdo-pill" style="color:var(--text3);border-color:var(--border)"><span style="font-size:10px">★</span>présents dans les 2 itinéraires</div>
 </div>
 
-<!-- ── BLOC ACCLIMATATION ── -->
-<div class="acclim-block" style="margin-top:20px">
+<!-- ACCLIM BLOCK -->
+<div class="acclim-block">
   <div class="acclim-header" onclick="toggleAcclim()">
     <div>
       <div class="acclim-title">🫁 Stratégie d'acclimatation — Pourquoi 5 semaines change tout</div>
-      <div class="acclim-subtitle">Principes, profil d'altitude et erreurs à éviter — cliquer pour développer</div>
+      <div class="acclim-subtitle">Principes, progression et erreurs à éviter · cliquer pour développer</div>
     </div>
     <div class="acclim-toggle" id="acclim-toggle">▾</div>
   </div>
   <div class="acclim-body" id="acclim-body">
     <div class="acclim-rule">
-      La règle fondamentale en altitude : <strong>"Climb high, sleep low."</strong> Le corps s'adapte pendant le sommeil — l'altitude où vous dormez est plus importante que l'altitude que vous atteignez en journée. Au-dessus de 3 000 m, ne pas monter l'altitude de nuit de plus de 300–500 m par jour. Intercaler systématiquement des jours de récupération active (balade légère, pas de randonnée intense).
+      Règle fondamentale : <strong>"Climb high, sleep low."</strong> Le corps s'adapte pendant le sommeil — l'altitude où vous dormez est plus déterminante que l'altitude atteinte en journée. Au-dessus de 3 000 m, ne jamais monter l'altitude de nuit de plus de 300–500 m par jour. Des jours de récupération active (balade légère, pas de randonnée intense) sont non négociables.
     </div>
-    <div class="acclim-rule" style="margin-bottom:16px">
-      Avec 5 semaines, vous pouvez construire une <strong>progression en escalier</strong> : Cusco (3 400 m) d'abord, descente en Vallée Sacrée (2 800 m) pour dormir et randonner fort, Vinicunca (5 050 m) seulement en excursion sans nuit, puis remonter progressivement vers Colca (3 635 m) et Titicaca (3 812 m) en toute fin de voyage. Le Titicaca à la fin n'est pas un hasard — c'est la nuit la plus haute du séjour.
+    <div class="acclim-rule">
+      La clé des deux itinéraires : <strong>les altitudes nocturnes progressent en escalier</strong>, les étapes les plus hautes (Titicaca à 3 812 m) arrivent en toute fin de voyage, et Vinicunca (5 050 m) est toujours une excursion à la journée — jamais une nuit là-haut.
     </div>
-    <div style="font-size:11px;color:var(--text3);margin-bottom:8px;text-transform:uppercase;letter-spacing:0.06em">Profil des altitudes nocturnes — du plus bas au plus haut</div>
-    <div class="alt-profile">
-      <div class="alt-chip low">Lima · 0 m</div>
-      <div class="alt-chip low">Aguas Calientes · 2 040 m</div>
-      <div class="alt-chip low">Machu Picchu · 2 430 m</div>
-      <div class="alt-chip low">Ollantaytambo · 2 792 m</div>
-      <div class="alt-chip low">Arequipa · 2 335 m</div>
-      <div class="alt-chip mid">Cusco · 3 400 m</div>
-      <div class="alt-chip mid">Colca/Chivay · 3 635 m</div>
-      <div class="alt-chip mid">Puno · 3 812 m</div>
-      <div class="alt-chip high">Vinicunca · 5 050 m ⚡ excursion, pas de nuit</div>
+
+    <div style="font-size:11px;color:var(--text3);text-transform:uppercase;letter-spacing:0.07em;margin-bottom:10px;">Profil d'altitude des étapes</div>
+    <div style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:18px;">
+      <span style="font-size:11px;padding:3px 10px;border-radius:100px;background:rgba(109,184,154,0.1);color:var(--alt-ok);border:1px solid rgba(109,184,154,0.2)">Lima 0 m ✅</span>
+      <span style="font-size:11px;padding:3px 10px;border-radius:100px;background:rgba(109,184,154,0.1);color:var(--alt-ok);border:1px solid rgba(109,184,154,0.2)">Aguas Calientes 2 040 m ✅</span>
+      <span style="font-size:11px;padding:3px 10px;border-radius:100px;background:rgba(109,184,154,0.1);color:var(--alt-ok);border:1px solid rgba(109,184,154,0.2)">Machu Picchu 2 430 m ✅</span>
+      <span style="font-size:11px;padding:3px 10px;border-radius:100px;background:rgba(109,184,154,0.1);color:var(--alt-ok);border:1px solid rgba(109,184,154,0.2)">Ollantaytambo 2 792 m ✅</span>
+      <span style="font-size:11px;padding:3px 10px;border-radius:100px;background:rgba(109,184,154,0.1);color:var(--alt-ok);border:1px solid rgba(109,184,154,0.2)">Arequipa 2 335 m ✅</span>
+      <span style="font-size:11px;padding:3px 10px;border-radius:100px;background:rgba(200,131,58,0.1);color:var(--alt-warn);border:1px solid rgba(200,131,58,0.2)">Cusco 3 400 m ⚠️ 5j acclimatation</span>
+      <span style="font-size:11px;padding:3px 10px;border-radius:100px;background:rgba(200,131,58,0.1);color:var(--alt-warn);border:1px solid rgba(200,131,58,0.2)">Chivay/Colca 3 635 m ⚠️ après 3 sem.</span>
+      <span style="font-size:11px;padding:3px 10px;border-radius:100px;background:rgba(200,131,58,0.1);color:var(--alt-warn);border:1px solid rgba(200,131,58,0.2)">Puno/Titicaca 3 812 m ⚠️ en dernier</span>
+      <span style="font-size:11px;padding:3px 10px;border-radius:100px;background:rgba(224,92,92,0.1);color:var(--alt-high);border:1px solid rgba(224,92,92,0.2)">Vinicunca 5 050 m 🔴 excursion uniquement</span>
     </div>
+
     <div class="acclim-tips">
-      <div class="acclim-tip"><strong>Jours 1–3 à Lima (0 m)</strong>Ne pas chercher à aller vite. Profiter de la gastronomie, bien dormir, s'hydrater. Le corps part de zéro.</div>
-      <div class="acclim-tip"><strong>Arrivée à Cusco (3 400 m)</strong>Repos strict les 24 premières heures. Pas de randonnée, pas d'alcool, repas légers. Le mal des montagnes peut frapper même les sportifs.</div>
-      <div class="acclim-tip"><strong>Descendre pour randonner fort</strong>La Vallée Sacrée (2 800 m) permet de faire de vraies randonnées une fois acclimatés à Cusco. C'est le paradoxe : on monte en Vallée pour randonner mieux.</div>
-      <div class="acclim-tip"><strong>Vinicunca (5 050 m)</strong>Ne jamais y aller avant 7–10 jours d'acclimatation progressive. Excursion seulement — jamais de nuit là-haut. Le corps monte, redescend dormir à Cusco.</div>
-      <div class="acclim-tip"><strong>Titicaca en dernier (3 812 m)</strong>La nuit la plus haute du voyage. Le placer en fin de séjour garantit que le corps est parfaitement adapté. C'est l'erreur la plus commune de le faire trop tôt.</div>
-      <div class="acclim-tip"><strong>Diamox (acétazolamide)</strong>Médicament préventif efficace. À discuter impérativement avec votre médecin avant le départ. Non obligatoire, mais fortement recommandé pour les premières 48h à Cusco.</div>
+      <div class="acclim-tip"><strong>J1 à Cusco — repos strict</strong>Pas d'effort physique. Hydratation intense, repas très léger, thé de coca en continu. Sieste. Pas d'alcool. Observer le corps.</div>
+      <div class="acclim-tip"><strong>J2 — acclimatation passive</strong>Balade très lente en ville, max 1h, aucun dénivelé. Plaza de Armas, San Pedro. Si maux de tête : repos supplémentaire.</div>
+      <div class="acclim-tip"><strong>J3–4 — montée progressive</strong>Sorties légères vers 3 600–3 800 m (Sacsayhuamán, Qenqo). 2–3h max. Toujours redescendre dormir à Cusco.</div>
+      <div class="acclim-tip"><strong>J5 — confirmation</strong>Excursion à Pisac (3 076 m) — légèrement plus bas. Corps qui confirme son adaptation. Prêt pour Vinicunca dès J7.</div>
+      <div class="acclim-tip"><strong>Vallée Sacrée — zone de performance</strong>À 2 792 m après Cusco, le corps respire mieux et randonne à pleine capacité. Paradoxe : on randonne mieux en descendant.</div>
+      <div class="acclim-tip"><strong>Titicaca toujours en dernier</strong>3 812 m = nuit la plus haute. Le placer en fin de voyage garantit 4 semaines d'adaptation. C'est l'erreur la plus commune de le faire trop tôt.</div>
     </div>
-    <div class="acclim-warning"><strong>Signes à prendre au sérieux :</strong> Maux de tête persistants, nausées, insomnie, essoufflement au repos, perte d'appétit. Symptômes normaux les 24 premières heures — mais si ça empire après 48h, redescendre en altitude sans hésiter. Jamais de "on verra demain" en cas de symptômes qui s'aggravent.</div>
+    <div class="acclim-warning"><strong>Signes à prendre au sérieux :</strong> Maux de tête persistants, nausées, insomnie, essoufflement au repos. Normaux les 24 premières heures — si ça empire après 48h : redescendre immédiatement. Jamais de "on verra demain". · <strong>Diamox :</strong> à discuter avec votre médecin avant le départ.</div>
   </div>
 </div>
 
@@ -218,52 +232,59 @@
   <div class="map-legend" id="map-legend"></div>
 </div>
 
-<div class="tabs" style="margin-top:20px">
-  <button class="tab-btn t1 active" onclick="show(1)">🏔 Itinéraire 1 — Progressif Classique</button>
-  <button class="tab-btn t2" onclick="show(2)">🌿 Itinéraire 2 — Amazonie en ouverture</button>
-  <button class="tab-btn t3" onclick="show(3)">🗺 Itinéraire 3 — Circuit Complet Sud</button>
+<div class="tabs">
+  <button class="tab-btn t1 active" onclick="show(1)">🏔 Itinéraire A — Andes pur · 35 jours</button>
+  <button class="tab-btn t2" onclick="show(2)">🌿 Itinéraire B — Amazonie + Andes · 37 jours</button>
 </div>
 
-<!-- ══════════════════════════════════
-  ITINÉRAIRE 1 — Progressif Classique
-  Lima → Cusco → Vallée Sacrée → Machu Picchu → Vinicunca → Colca → Titicaca → Arequipa
-  ~35 jours
-══════════════════════════════════ -->
+<!-- ══════════════════════════════════════════════════════
+  ITINÉRAIRE A — Andes pur, acclimatation optimale
+  Lima → Cusco (5j acclim) → Vinicunca → Vallée Sacrée → Machu Picchu → Colca → Titicaca → Arequipa
+  Progression nocturne : 0 → 3400 → 2792 → 2040 → 3635 → 3812 → 2335
+═══════════════════════════════════════════════════════ -->
 <div class="itinerary it1 active" id="it1">
-  <div class="intro">La séquence d'acclimatation la plus logique : on monte en altitude par paliers, on descend toujours pour dormir après un sommet, et les étapes les plus hautes (Titicaca, Colca) arrivent en fin de voyage quand le corps est parfaitement adapté. <strong>Meilleure saison : mai à novembre.</strong></div>
+  <div class="intro">
+    La progression d'altitude la plus rigoureuse possible : chaque étape prépare la suivante. La Vallée Sacrée et Machu Picchu interviennent au moment où le corps est adapté à Cusco mais peut souffler à 2 800 m — c'est là qu'on randonne le mieux. Colca et Titicaca en fin de voyage, quand tout ça ne fait plus peur. <strong>Meilleure saison : mai à novembre.</strong>
+  </div>
+
+  <!-- Visualisation progression altitude -->
+  <div class="alt-banner">
+    <div class="alt-banner-title">Progression des altitudes nocturnes — J1 à J35</div>
+    <div class="alt-steps" id="alt-steps-1"></div>
+  </div>
 
   <div class="timeline">
 
     <!-- Lima -->
     <div class="stop"><div class="stop-left"><div class="dot"></div></div><div class="stop-card">
-      <div class="stop-header"><div class="stop-name">Lima</div><span class="stop-days">3 jours</span></div>
-      <div class="stop-meta"><span class="alt-badge low">🌊 0 m</span><span class="acclim-badge-sm">Départ idéal — altitude zéro</span></div>
-      <div class="stop-desc">Arrivée en douceur dans la capitale gastronomique d'Amérique du Sud. Zéro contrainte d'altitude — profiter pleinement, bien dormir, s'hydrater. Le corps part de zéro et part bien.</div>
+      <div class="stop-header"><div class="stop-name">Lima</div><span class="stop-days">3 jours · J1–3</span></div>
+      <div class="stop-meta"><span class="alt-badge low">🌊 0 m</span><span class="acclim-badge-sm">Zéro contrainte — départ idéal</span></div>
+      <div class="stop-desc">Arrivée en douceur dans la capitale gastronomique d'Amérique du Sud. Aucune contrainte d'altitude — profiter pleinement, bien dormir, s'hydrater abondamment. Le corps part de zéro et part bien.</div>
       <div class="stop-highlights">
         <div class="highlight"><span class="highlight-icon">🌅</span><span>Coucher de soleil sur les falaises de Miraflores face au Pacifique</span></div>
-        <div class="highlight"><span class="highlight-icon">🍽️</span><span>Ceviche au marché de Surquillo, tiraditos et causa dans les restaurants de Barranco</span></div>
-        <div class="highlight"><span class="highlight-icon">🏛️</span><span>Musée Larco : 5 000 ans d'art pré-Inca, collections Incas remarquables</span></div>
+        <div class="highlight"><span class="highlight-icon">🍽️</span><span>Ceviche au marché de Surquillo, tiraditos et causa limeña dans les restaurants de Barranco</span></div>
+        <div class="highlight"><span class="highlight-icon">🏛️</span><span>Musée Larco : 5 000 ans d'art pré-Inca — préparer le voyage intellectuellement</span></div>
       </div>
       <div class="stop-tags"><span class="tag">gastronomie</span><span class="tag">côte Pacifique</span><span class="tag">culture</span></div>
     </div></div>
 
-    <!-- Cusco acclim -->
-    <div class="stop"><div class="stop-left"><div class="dot"></div></div><div class="stop-card acclim">
-      <div class="stop-header"><div class="stop-name">Cusco — acclimatation</div><span class="stop-days">5 jours</span></div>
+    <!-- Cusco acclimatation -->
+    <div class="stop"><div class="stop-left"><div class="dot"></div></div><div class="stop-card acclim-card">
+      <div class="stop-header"><div class="stop-name">Cusco — acclimatation</div><span class="stop-days">5 jours · J4–8</span></div>
       <div class="stop-meta"><span class="alt-badge mid">🏔 3 400 m</span><span class="acclim-badge-sm">Palier 1 — adaptation critique</span></div>
-      <div class="stop-desc">Le saut le plus difficile du voyage : de 0 m à 3 400 m d'un coup en avion. Ces 5 jours sont entièrement structurés autour de la récupération progressive — pas de randonnée intense avant le jour 3. La ville Inca est suffisamment riche pour occuper sans effort.</div>
+      <div class="stop-desc">Le saut le plus difficile du voyage : de 0 m à 3 400 m d'un seul vol. Ces 5 jours sont entièrement structurés autour de la récupération progressive. La ville Inca est suffisamment riche pour occuper sans effort physique.</div>
       <div class="acclim-program">
-        <div class="acclim-program-title">Programme d'acclimatation jour par jour</div>
-        <div class="acclim-day"><span class="acclim-day-num">J1</span><span><strong style="color:var(--text)">Repos strict.</strong> Arriver en fin de matinée, s'installer, hydratation intense, repas très léger. Pas de visite, pas d'effort. Thé de coca en continu. Sieste obligatoire.</span></div>
-        <div class="acclim-day"><span class="acclim-day-num">J2</span><span><strong style="color:var(--text)">Acclimatation active légère.</strong> Balade tranquille dans la vieille ville (1–2h), Plaza de Armas, marché San Pedro. Pas de dénivelé. Observation de votre état.</span></div>
-        <div class="acclim-day"><span class="acclim-day-num">J3</span><span><strong style="color:var(--text)">Première sortie en altitude.</strong> Ruines de Qenqo et Puca Pucara (3 600–3 800 m) en balade de 2–3h max. Redescendre dormir à Cusco (3 400 m).</span></div>
-        <div class="acclim-day"><span class="acclim-day-num">J4</span><span><strong style="color:var(--text)">Randonnée légère.</strong> Montée à Sacsayhuamán (3 700 m) tôt le matin pour le lever de soleil, descente lente. Après-midi libre en ville.</span></div>
-        <div class="acclim-day"><span class="acclim-day-num">J5</span><span><strong style="color:var(--text)">Journée basse altitude.</strong> Excursion à Pisac (3 076 m) — légèrement plus bas. Marché local et ruines. Retour dormir à Cusco. Corps prêt pour la Vallée.</span></div>
+        <div class="acclim-program-title">Programme jour par jour</div>
+        <div class="acclim-day"><span class="acclim-day-num">J4</span><span><strong style="color:var(--text)">Repos strict.</strong> Arriver en matinée, s'installer, hydratation intense, repas très léger. Thé de coca en continu. Sieste obligatoire. Pas d'alcool.</span></div>
+        <div class="acclim-day"><span class="acclim-day-num">J5</span><span><strong style="color:var(--text)">Acclimatation passive.</strong> Balade lente dans la vieille ville (1–2h max), Plaza de Armas, marché San Pedro. Aucun dénivelé. Observer les signaux du corps.</span></div>
+        <div class="acclim-day"><span class="acclim-day-num">J6</span><span><strong style="color:var(--text)">Première sortie en altitude.</strong> Ruines de Qenqo et Puca Pucara (3 600–3 800 m), balade de 2–3h max. Retour dormir à Cusco (3 400 m).</span></div>
+        <div class="acclim-day"><span class="acclim-day-num">J7</span><span><strong style="color:var(--text)">Lever de soleil à Sacsayhuamán.</strong> Montée tôt (3 700 m), descente lente. Après-midi libre en ville. Corps qui confirme son adaptation.</span></div>
+        <div class="acclim-day"><span class="acclim-day-num">J8</span><span><strong style="color:var(--text)">Excursion Pisac (3 076 m).</strong> Légèrement plus bas — ruines et marché local. Retour dormir à Cusco. Corps prêt pour Vinicunca.</span></div>
       </div>
       <div class="stop-highlights">
-        <div class="highlight"><span class="highlight-icon">🌅</span><span>Lever de soleil à Sacsayhuamán (J4) : Cusco s'étale dans la vallée sous la brume matinale</span></div>
-        <div class="highlight"><span class="highlight-icon">🍽️</span><span>Marché San Pedro : petit-déjeuner local, quinoa soupe, jus de maracuyá, chicha morada</span></div>
-        <div class="highlight"><span class="highlight-icon">🏛️</span><span>Quartier Qorikancha : temple Inca du Soleil recouvert d'or, sous le couvent colonial</span></div>
+        <div class="highlight"><span class="highlight-icon">🌅</span><span>Lever de soleil à Sacsayhuamán (J7) : Cusco s'étale dans la vallée sous la brume matinale</span></div>
+        <div class="highlight"><span class="highlight-icon">🍽️</span><span>Marché San Pedro chaque matin : quinoa soupe, jus de maracuyá, chicha morada, alpaca</span></div>
+        <div class="highlight"><span class="highlight-icon">🏛️</span><span>Qorikancha : temple Inca du Soleil recouvert d'or, aujourd'hui sous le couvent colonial</span></div>
       </div>
       <div class="stop-tags"><span class="tag">acclimatation</span><span class="tag">sites Incas</span><span class="tag">gastronomie</span><span class="tag">3 400 m</span></div>
     </div></div>
@@ -271,13 +292,13 @@
     <!-- Vinicunca -->
     <div class="stop"><div class="stop-left"><div class="dot mustdo"></div></div><div class="stop-card mustdo">
       <div class="mustdo-badge">★ INCONTOURNABLE</div>
-      <div class="stop-header"><div class="stop-name">Vinicunca — Montagne Arc-en-ciel</div><span class="stop-days">2 jours</span></div>
-      <div class="stop-meta"><span class="alt-badge high">⚡ 5 050 m — excursion, pas de nuit</span></div>
-      <div class="stop-desc">Après 5 jours d'acclimatation à Cusco, le corps est prêt pour l'excursion Vinicunca. Départ 4h du matin depuis Cusco, arrivée au point de départ du trek à 4 600 m, puis 4 km de montée jusqu'au sommet coloré. Les couches minérales exposées par la fonte des glaciers donnent des bandes rouges, vertes, jaunes et violettes uniques au monde. Retour dormir à Cusco (3 400 m).</div>
+      <div class="stop-header"><div class="stop-name">Vinicunca — Montagne Arc-en-ciel</div><span class="stop-days">2 jours · J9–10</span></div>
+      <div class="stop-meta"><span class="alt-badge high">⚡ 5 050 m — excursion J9, pas de nuit</span></div>
+      <div class="stop-desc">Après 5 jours d'acclimatation, le corps est prêt pour cette excursion exigeante. Départ 4h du matin depuis Cusco, arrivée au point de départ du trek à 4 600 m, puis 4 km de montée jusqu'au sommet. Les couches minérales millénaires exposées par la fonte des glaciers donnent des bandes de couleurs uniques au monde : rouge bordeaux, vert émeraude, jaune ocre, violet. Retour dormir à Cusco (3 400 m). J10 : repos absolu.</div>
       <div class="stop-highlights">
         <div class="highlight"><span class="highlight-icon">🌈</span><span>Vinicunca à l'aube : arriver avant 9h pour la lumière rasante et éviter la foule de l'après-midi</span></div>
-        <div class="highlight"><span class="highlight-icon">🏔</span><span>Vue sur le Nevado Ausangate (6 384 m) en toile de fond — le plus haut sommet du sud du Pérou</span></div>
-        <div class="highlight"><span class="highlight-icon">🌅</span><span>J+1 : journée de repos à Cusco après l'effort — essentielle avant de descendre en Vallée</span></div>
+        <div class="highlight"><span class="highlight-icon">🏔</span><span>Vue sur le Nevado Ausangate (6 384 m) — le toit du sud du Pérou — en toile de fond</span></div>
+        <div class="highlight"><span class="highlight-icon">💤</span><span>J10 repos complet à Cusco — indispensable avant la descente en Vallée Sacrée</span></div>
       </div>
       <div class="stop-tags"><span class="tag">🌈 arc-en-ciel</span><span class="tag">5 050 m excursion</span><span class="tag">Ausangate</span><span class="tag">glaciers</span></div>
     </div></div>
@@ -285,311 +306,219 @@
     <!-- Vallée Sacrée -->
     <div class="stop"><div class="stop-left"><div class="dot mustdo"></div></div><div class="stop-card mustdo">
       <div class="mustdo-badge">★ INCONTOURNABLE</div>
-      <div class="stop-header"><div class="stop-name">Vallée Sacrée & Machu Picchu</div><span class="stop-days">13 jours</span></div>
+      <div class="stop-header"><div class="stop-name">Vallée Sacrée & Machu Picchu</div><span class="stop-days">13 jours · J11–23</span></div>
       <div class="stop-meta"><span class="alt-badge low">🏔 2 792 m Ollantaytambo · 2 040 m Aguas Calientes</span></div>
-      <div class="stop-desc">Le cœur physique du voyage — et la plus belle récompense de l'acclimatation. À 2 800 m, avec un corps adapté depuis 7 jours, vous pouvez enfin randonner à pleine capacité. Base fixe à Ollantaytambo pour 10 jours, puis 3 jours à Aguas Calientes pour Machu Picchu. La descente à 2 040 m est aussi une récupération bienvenue.</div>
+      <div class="stop-desc">Le cœur physique du voyage — et la récompense de l'acclimatation. En descendant à 2 800 m depuis Cusco, le corps respire mieux et peut randonner à pleine puissance. Base fixe à Ollantaytambo pour 10 jours, puis 3 jours à Aguas Calientes pour Machu Picchu. La descente à 2 040 m est aussi une récupération naturelle bienvenue avant de remonter vers Colca.</div>
       <div class="acclim-program">
-        <div class="acclim-program-title">Séquence Vallée Sacrée — logique altitude</div>
-        <div class="acclim-day"><span class="acclim-day-num">J1–2</span><span>Arrivée à Ollantaytambo (2 792 m). Descente depuis Cusco = corps qui respire mieux. Randonnée légère dans le village et alentours.</span></div>
-        <div class="acclim-day"><span class="acclim-day-num">J3–4</span><span>Randonnées moyennes : Pumamarca (panorama sur la vallée, 5–6h), terrasses d'Ollantaytambo au lever du soleil.</span></div>
-        <div class="acclim-day"><span class="acclim-day-num">J5–7</span><span>Trek Lares optionnel (3 jours) : cols à 4 400 m, villages Quechua isolés, arrivée à Ollantaytambo. Corps au pic de forme.</span></div>
-        <div class="acclim-day"><span class="acclim-day-num">J8–9</span><span>Journées douces : Pisac, Moray, Salines de Maras, marché du dimanche. Vélo ou balade.</span></div>
-        <div class="acclim-day"><span class="acclim-day-num">J10–12</span><span><strong style="color:var(--text)">Machu Picchu (2 430 m).</strong> Train depuis Ollantaytambo, nuit à Aguas Calientes (2 040 m). Deux visites de la citadelle : la première à 5h30 dans la brume, la seconde guidée. Sun Gate (Inti Punku) le 3e jour.</span></div>
-        <div class="acclim-day"><span class="acclim-day-num">J13</span><span>Retour Cusco par train + bus. Nuit à Cusco avant la route vers Colca.</span></div>
+        <div class="acclim-program-title">Séquence des 13 jours</div>
+        <div class="acclim-day"><span class="acclim-day-num">J11–12</span><span>Arrivée à Ollantaytambo (2 792 m). Descente depuis Cusco = soulagement immédiat. Randonnée légère les alentours, lever de soleil sur les terrasses.</span></div>
+        <div class="acclim-day"><span class="acclim-day-num">J13–15</span><span>Randonnées moyennes à fortes : Pumamarca (panorama 360° sur la vallée, 5–6h), Pisac ruines (3h depuis le village).</span></div>
+        <div class="acclim-day"><span class="acclim-day-num">J16–18</span><span>Journées d'exploration : Moray (terrasses circulaires Incas), Salines de Maras, Chinchero. Option vélo sur ce circuit.</span></div>
+        <div class="acclim-day"><span class="acclim-day-num">J19</span><span>Marché dominical de Pisac — le meilleur de la Vallée Sacrée. Journée douce.</span></div>
+        <div class="acclim-day"><span class="acclim-day-num">J20–22</span><span><strong style="color:var(--text)">Machu Picchu.</strong> Train depuis Ollantaytambo, nuit à Aguas Calientes (2 040 m). Entrée J21 à 5h30 dans la brume. J22 : Sun Gate ou Montaña MP selon billets.</span></div>
+        <div class="acclim-day"><span class="acclim-day-num">J23</span><span>Retour Ollantaytambo puis Cusco en bus. Nuit à Cusco avant la route vers Colca.</span></div>
       </div>
       <div class="stop-highlights">
         <div class="highlight"><span class="highlight-icon">🏛️</span><span>Machu Picchu à 5h30 : la cité dans la brume avant toute foule — le moment le plus fort du voyage</span></div>
         <div class="highlight"><span class="highlight-icon">🥾</span><span>Sun Gate (Inti Punku) : arrivée par le chemin Inca historique, vue plongeante sur la citadelle</span></div>
-        <div class="highlight"><span class="highlight-icon">🥾</span><span>Randonnée Pumamarca : vue à 360° sur la Vallée Sacrée depuis les crêtes (5–6h)</span></div>
+        <div class="highlight"><span class="highlight-icon">🥾</span><span>Randonnée Pumamarca : vues à 360° sur toute la Vallée Sacrée depuis les crêtes (5–6h)</span></div>
         <div class="highlight"><span class="highlight-icon">🌅</span><span>Lever de soleil sur les terrasses d'Ollantaytambo avant l'ouverture officielle (départ 5h30)</span></div>
-        <div class="highlight"><span class="highlight-icon">🍽️</span><span>Marché dominical de Pisac : produits locaux, artisanat Quechua authentique</span></div>
+        <div class="highlight"><span class="highlight-icon">🍽️</span><span>Marché dominical de Pisac : produits locaux, cuisines communautaires, artisanat Quechua</span></div>
       </div>
-      <div class="stop-tags"><span class="tag">🏛️ Machu Picchu</span><span class="tag">patrimoine UNESCO</span><span class="tag">randonnée</span><span class="tag">trek Lares</span><span class="tag">base fixe</span></div>
+      <div class="stop-tags"><span class="tag">🏛️ Machu Picchu</span><span class="tag">patrimoine UNESCO</span><span class="tag">randonnée</span><span class="tag">base fixe</span><span class="tag">2 792 m</span></div>
     </div></div>
 
     <!-- Canyon del Colca -->
     <div class="stop"><div class="stop-left"><div class="dot mustdo"></div></div><div class="stop-card mustdo">
       <div class="mustdo-badge">★ INCONTOURNABLE</div>
-      <div class="stop-header"><div class="stop-name">Canyon del Colca — Chivay</div><span class="stop-days">5 jours</span></div>
-      <div class="stop-meta"><span class="alt-badge mid">🦅 3 635 m Chivay · 3 287 m Cruz del Condor</span><span class="acclim-badge-sm">Palier 2 — corps adapté</span></div>
-      <div class="stop-desc">Après 3 semaines d'acclimatation progressive, retour à une altitude comparable à Cusco — mais cette fois le corps est parfaitement rodé. Chivay comme base pour 5 jours : Cruz del Condor à l'aube, trek 2 nuits dans le fond du canyon (1 200 m de dénivelé), bains thermaux. Un des grands moments physiques et visuels du Pérou.</div>
+      <div class="stop-header"><div class="stop-name">Canyon del Colca — Chivay</div><span class="stop-days">4 jours · J24–27</span></div>
+      <div class="stop-meta"><span class="alt-badge mid">🦅 3 635 m Chivay · Cruz del Condor 3 287 m</span><span class="acclim-badge-sm">Palier 2 — corps parfaitement adapté</span></div>
+      <div class="stop-desc">Après 3 semaines d'acclimatation progressive, retour à une altitude comparable à Cusco — mais le corps est rodé. Chivay comme base. Cruz del Condor à l'aube pour les condors, trek 2 nuits dans le fond du canyon (1 200 m de dénivelé descente + remontée), bains thermaux. Un des grands moments physiques du voyage.</div>
       <div class="stop-highlights">
-        <div class="highlight"><span class="highlight-icon">🦅</span><span>Cruz del Condor à 7h : condors des Andes (envergure jusqu'à 3,2 m) en vol thermal — arriver avant 7h pour les meilleures places</span></div>
-        <div class="highlight"><span class="highlight-icon">🥾</span><span>Trek 2 nuits : descente jusqu'à l'oasis de Sangalle (palmiers au fond du canyon), nuit, remontée à l'aube</span></div>
+        <div class="highlight"><span class="highlight-icon">🦅</span><span>Cruz del Condor à 7h : condors des Andes (envergure jusqu'à 3,2 m) en spirale dans les thermiques — arriver avant 7h</span></div>
+        <div class="highlight"><span class="highlight-icon">🥾</span><span>Trek 2 nuits : descente jusqu'à l'oasis de Sangalle, nuit en fond de canyon, remontée à l'aube</span></div>
         <div class="highlight"><span class="highlight-icon">🌅</span><span>Lever de soleil depuis le fond du canyon : les parois de 1 200 m s'embrasent progressivement</span></div>
-        <div class="highlight"><span class="highlight-icon">🍽️</span><span>Bains thermaux naturels de La Calera après le trek — récupération parfaite</span></div>
+        <div class="highlight"><span class="highlight-icon">🍽️</span><span>Bains thermaux de La Calera après le trek — récupération méritée</span></div>
       </div>
       <div class="stop-tags"><span class="tag">🦅 condors</span><span class="tag">canyon</span><span class="tag">trek 2 nuits</span><span class="tag">panoramas</span></div>
     </div></div>
 
     <!-- Titicaca -->
-    <div class="stop"><div class="stop-left"><div class="dot"></div></div><div class="stop-card acclim">
-      <div class="stop-header"><div class="stop-name">Lac Titicaca — Puno & îles</div><span class="stop-days">5 jours</span></div>
-      <div class="stop-meta"><span class="alt-badge mid">🌊 3 812 m — nuit la plus haute du séjour</span><span class="acclim-badge-sm">Palier final — en toute confiance</span></div>
-      <div class="stop-desc">Placé délibérément en fin de voyage : après 4 semaines d'acclimatation progressive, 3 812 m ne posent plus de problème. Le corps est adapté et vous pouvez profiter pleinement de la lumière extraordinaire du lac. Nuit en homestay sur Amantaní obligatoire — l'expérience la plus authentique du Pérou.</div>
+    <div class="stop"><div class="stop-left"><div class="dot"></div></div><div class="stop-card acclim-card">
+      <div class="stop-header"><div class="stop-name">Lac Titicaca — Puno & îles</div><span class="stop-days">5 jours · J28–32</span></div>
+      <div class="stop-meta"><span class="alt-badge mid">🌊 3 812 m — nuit la plus haute du voyage</span><span class="acclim-badge-sm">Palier final — après 4 semaines d'adaptation</span></div>
+      <div class="stop-desc">Placé délibérément en fin de voyage : après 4 semaines de progression, 3 812 m ne pose plus de problème. Le corps est parfaitement adapté et vous pouvez profiter pleinement de la lumière extraordinaire du lac le plus haut du monde. Nuit en homestay sur Amantaní — l'expérience la plus authentique du Pérou.</div>
       <div class="stop-highlights">
         <div class="highlight"><span class="highlight-icon">🌅</span><span>Lever de soleil depuis le sommet d'Amantaní (4 100 m) : vue sur tout le lac dans la lumière dorée</span></div>
-        <div class="highlight"><span class="highlight-icon">🥾</span><span>Randonnée sur Taquile : chemins Incas entre terrasses et villages, île classée UNESCO</span></div>
-        <div class="highlight"><span class="highlight-icon">🍽️</span><span>Repas communautaire chez l'habitant : trucha du lac, quinoa, fèves fraîches</span></div>
-        <div class="highlight"><span class="highlight-icon">🏛️</span><span>Îles flottantes des Uros : visiter tôt le matin, avant les groupes de la journée</span></div>
+        <div class="highlight"><span class="highlight-icon">🥾</span><span>Randonnée sur Taquile : chemins Incas entre terrasses et villages de tisserands, île classée UNESCO</span></div>
+        <div class="highlight"><span class="highlight-icon">🍽️</span><span>Repas communautaire chez l'habitant : trucha fraîche du lac, quinoa, fèves — hospitalité Aymara</span></div>
+        <div class="highlight"><span class="highlight-icon">🏛️</span><span>Îles flottantes des Uros : visiter tôt le matin, avant les groupes journaliers</span></div>
       </div>
       <div class="stop-tags"><span class="tag">Titicaca</span><span class="tag">homestay</span><span class="tag">culture Aymara</span><span class="tag">lever de soleil</span><span class="tag">3 812 m</span></div>
     </div></div>
 
     <!-- Arequipa -->
     <div class="stop"><div class="stop-left"><div class="dot"></div></div><div class="stop-card">
-      <div class="stop-header"><div class="stop-name">Arequipa — départ</div><span class="stop-days">3 jours</span></div>
+      <div class="stop-header"><div class="stop-name">Arequipa — départ</div><span class="stop-days">3 jours · J33–35</span></div>
       <div class="stop-meta"><span class="alt-badge low">🌋 2 335 m — descente finale bienvenue</span></div>
-      <div class="stop-desc">Conclusion en beauté avec la Ciudad Blanca. La descente à 2 335 m après le Titicaca est un vrai soulagement pour le corps. Architecture coloniale en pierre volcanique blanche, gastronomie remarquable, monastère Santa Catalina. Départ international depuis Arequipa ou Lima (1h de vol).</div>
+      <div class="stop-desc">Conclusion parfaite à 2 335 m : le corps apprécie la descente après le Titicaca et Colca. La Ciudad Blanca construite en pierre volcanique blanche, gastronomie arequipeña remarquable, monastère Santa Catalina. 3 jours sans contrainte d'altitude avant le vol retour.</div>
       <div class="stop-highlights">
-        <div class="highlight"><span class="highlight-icon">🌋</span><span>Vue sur le volcan Misti enneigé (5 822 m) depuis les toits et miradors de la ville</span></div>
-        <div class="highlight"><span class="highlight-icon">🍽️</span><span>Rocoto relleno, chupe de camarones et adobo arequipeño au marché San Camilo</span></div>
+        <div class="highlight"><span class="highlight-icon">🌋</span><span>Panorama sur le volcan Misti enneigé (5 822 m) depuis les miradors et terrasses de la ville</span></div>
+        <div class="highlight"><span class="highlight-icon">🍽️</span><span>Rocoto relleno, adobo arequipeño, chupe de camarones — gastronomie locale parmi les meilleures du Pérou</span></div>
         <div class="highlight"><span class="highlight-icon">🏛️</span><span>Monastère Santa Catalina : labyrinthe de ruelles colorées, cloîtres et jardins suspendus</span></div>
       </div>
-      <div class="stop-tags"><span class="tag">volcans</span><span class="tag">gastronomie</span><span class="tag">architecture coloniale</span></div>
+      <div class="stop-tags"><span class="tag">volcans</span><span class="tag">gastronomie</span><span class="tag">architecture coloniale</span><span class="tag">récupération</span></div>
     </div></div>
 
   </div>
   <div class="total-bar">
-    <span>⏱ Total : ~36 jours</span>
+    <span>⏱ 35 jours</span>
     <span>✈️ Arrivée Lima / Départ Arequipa</span>
     <span>✈️ 1 vol interne Lima→Cusco</span>
     <span>🚌 5 déplacements terrestres</span>
-    <span>🌈 Vinicunca après J7 · 🏛️ Machu Picchu J15–17 · 🦅 Colca J26–30 · 🌊 Titicaca J31–35</span>
+    <span>🫁 Progression : 0→3400→2792→2040→3635→3812→2335 m</span>
   </div>
 </div>
 
-<!-- ══════════════════════════════════
-  ITINÉRAIRE 2 — Amazonie en ouverture
+<!-- ══════════════════════════════════════════════════════
+  ITINÉRAIRE B — Amazonie en ouverture + Andes
   Lima → Puerto Maldonado → Cusco → Vinicunca → Vallée Sacrée → Machu Picchu → Colca → Titicaca
-  ~35 jours
-══════════════════════════════════ -->
+  Progression nocturne : 0 → 250 → 3400 → 2792 → 2040 → 3635 → 3812
+═══════════════════════════════════════════════════════ -->
 <div class="itinerary it2" id="it2">
-  <div class="intro">Variante avec l'Amazonie en ouverture — une logique d'acclimatation encore plus douce : la forêt tropicale à 250 m permet une semaine de plus avant de monter à Cusco. Le corps arrive à 3 400 m mieux reposé et plus hydraté. <strong>Meilleure saison : mai à octobre.</strong></div>
+  <div class="intro">
+    L'Amazonie en premier apporte un bonus acclimatation réel : une semaine supplémentaire à basse altitude (250 m) avant de monter à Cusco, le corps arrive plus reposé et mieux hydraté. En contrepartie, on retire Arequipa du circuit pour rester dans les 5 semaines. À choisir si l'Amazonie est un vrai désir — pas juste pour "compléter" le voyage. <strong>Meilleure saison : mai à octobre.</strong>
+  </div>
+
+  <!-- Visualisation progression altitude -->
+  <div class="alt-banner">
+    <div class="alt-banner-title">Progression des altitudes nocturnes — J1 à J37</div>
+    <div class="alt-steps" id="alt-steps-2"></div>
+  </div>
 
   <div class="timeline">
 
+    <!-- Lima -->
     <div class="stop"><div class="stop-left"><div class="dot"></div></div><div class="stop-card">
-      <div class="stop-header"><div class="stop-name">Lima</div><span class="stop-days">3 jours</span></div>
-      <div class="stop-meta"><span class="alt-badge low">🌊 0 m</span><span class="acclim-badge-sm">Départ idéal — altitude zéro</span></div>
-      <div class="stop-desc">Arrivée gastronomique. Bien dormir, bien manger, s'hydrater. Le corps commence son voyage en pleine forme avant de plonger en forêt puis en altitude.</div>
+      <div class="stop-header"><div class="stop-name">Lima</div><span class="stop-days">3 jours · J1–3</span></div>
+      <div class="stop-meta"><span class="alt-badge low">🌊 0 m</span><span class="acclim-badge-sm">Zéro contrainte</span></div>
+      <div class="stop-desc">Arrivée gastronomique. Bien dormir, bien manger, s'hydrater. Le corps commence en pleine forme avant de plonger en forêt tropicale puis en altitude.</div>
       <div class="stop-highlights">
-        <div class="highlight"><span class="highlight-icon">🍽️</span><span>Ceviche au marché de Surquillo dès le premier matin, tiraditos et pisco sour à Barranco</span></div>
+        <div class="highlight"><span class="highlight-icon">🍽️</span><span>Ceviche au marché de Surquillo dès le premier matin — le meilleur accueil possible</span></div>
         <div class="highlight"><span class="highlight-icon">🌅</span><span>Coucher de soleil sur le Pacifique depuis les falaises de Miraflores</span></div>
-        <div class="highlight"><span class="highlight-icon">🏛️</span><span>Musée Larco et Huaca Pucllana : plonger dans 4 000 ans d'histoire pré-Inca</span></div>
+        <div class="highlight"><span class="highlight-icon">🏛️</span><span>Musée Larco et Huaca Pucllana : 4 000 ans d'histoire pré-Inca en pleine ville</span></div>
       </div>
       <div class="stop-tags"><span class="tag">gastronomie</span><span class="tag">côte Pacifique</span><span class="tag">culture</span></div>
     </div></div>
 
-    <div class="stop"><div class="stop-left"><div class="dot"></div></div><div class="stop-card acclim">
-      <div class="stop-header"><div class="stop-name">Amazonie — Puerto Maldonado</div><span class="stop-days">5 jours</span></div>
-      <div class="stop-meta"><span class="alt-badge low">🌿 250 m</span><span class="acclim-badge-sm">Bonus acclimatation — forêt avant altitude</span></div>
-      <div class="stop-desc">La Réserve de Tambopata à 250 m : biodiversité parmi les plus riches de la planète. Avantage acclimatation majeur : une semaine de plus à basse altitude, le corps arrive à Cusco mieux hydraté et plus reposé. Expérience radicalement différente de tout le reste du voyage.</div>
+    <!-- Amazonie -->
+    <div class="stop"><div class="stop-left"><div class="dot"></div></div><div class="stop-card acclim-card">
+      <div class="stop-header"><div class="stop-name">Amazonie — Puerto Maldonado</div><span class="stop-days">5 jours · J4–8</span></div>
+      <div class="stop-meta"><span class="alt-badge low">🌿 250 m</span><span class="acclim-badge-sm">Bonus acclimatation — corps reposé avant l'altitude</span></div>
+      <div class="stop-desc">La Réserve de Tambopata à 250 m d'altitude. L'avantage acclimatation est réel : une semaine de plus à basse altitude, corps bien hydraté par l'humidité de la forêt, pas de stress physique. L'Amazonie péruvienne est l'une des zones de biodiversité les plus riches de la planète — une expérience radicalement différente de tout le reste du voyage. Lodge avec guides naturalistes locaux, sorties à l'aube et au crépuscule.</div>
       <div class="stop-highlights">
-        <div class="highlight"><span class="highlight-icon">🌅</span><span>Sortie à l'aube en pirogue : caïmans, loutres géantes, aras, singes — faune sans équivalent</span></div>
-        <div class="highlight"><span class="highlight-icon">🥾</span><span>Marche nocturne avec guide naturaliste : grenouilles venimeuses, tarentules, sons de la forêt</span></div>
-        <div class="highlight"><span class="highlight-icon">🍽️</span><span>Cuisine locale au lodge : paiche (poisson géant d'Amazonie), fruits exotiques, camu camu</span></div>
+        <div class="highlight"><span class="highlight-icon">🌅</span><span>Sortie à l'aube en pirogue sur la rivière Tambopata : caïmans, loutres géantes, aras, singes</span></div>
+        <div class="highlight"><span class="highlight-icon">🥾</span><span>Marche nocturne avec guide naturaliste : faune nocturne, grenouilles venimeuses, sons de la forêt</span></div>
+        <div class="highlight"><span class="highlight-icon">🍽️</span><span>Cuisine locale au lodge : paiche (poisson géant d'Amazonie), fruits exotiques, jus de camu camu</span></div>
       </div>
-      <div class="stop-tags"><span class="tag">Amazonie</span><span class="tag">biodiversité</span><span class="tag">lodge</span><span class="tag">faune sauvage</span></div>
+      <div class="stop-tags"><span class="tag">Amazonie</span><span class="tag">biodiversité</span><span class="tag">lodge</span><span class="tag">faune sauvage</span><span class="tag">250 m</span></div>
     </div></div>
 
-    <div class="stop"><div class="stop-left"><div class="dot"></div></div><div class="stop-card acclim">
-      <div class="stop-header"><div class="stop-name">Cusco — acclimatation</div><span class="stop-days">5 jours</span></div>
-      <div class="stop-meta"><span class="alt-badge mid">🏔 3 400 m</span><span class="acclim-badge-sm">Palier 1 — vol direct depuis la forêt</span></div>
-      <div class="stop-desc">Vol Puerto Maldonado → Cusco (45 min). Attention : le passage direct forêt tropicale → haute altitude est physiquement éprouvant même si le corps est bien reposé. Les 48 premières heures sont encore plus cruciales ici. Programme identique à l'itinéraire 1, mais avec une vigilance renforcée les premiers jours.</div>
+    <!-- Cusco acclimatation -->
+    <div class="stop"><div class="stop-left"><div class="dot"></div></div><div class="stop-card acclim-card">
+      <div class="stop-header"><div class="stop-name">Cusco — acclimatation</div><span class="stop-days">5 jours · J9–13</span></div>
+      <div class="stop-meta"><span class="alt-badge mid">🏔 3 400 m</span><span class="acclim-badge-sm">Palier 1 — vigilance renforcée (après forêt tropicale)</span></div>
+      <div class="stop-desc">Vol Puerto Maldonado → Cusco (45 min). Attention particulière : le passage direct forêt tropicale → haute altitude est physiologiquement plus éprouvant que Lima → Cusco. Le corps quitte une atmosphère saturée d'oxygène et d'humidité pour arriver à 3 400 m. Les 48 premières heures sont encore plus cruciales ici — repos strict encore plus important.</div>
       <div class="acclim-program">
-        <div class="acclim-program-title">Programme d'acclimatation</div>
-        <div class="acclim-day"><span class="acclim-day-num">J1</span><span><strong style="color:var(--text)">Repos total.</strong> Arriver l'après-midi, repos immédiat, hydratation maximale, repas très léger. Thé de coca dès l'arrivée. Pas d'alcool.</span></div>
-        <div class="acclim-day"><span class="acclim-day-num">J2</span><span><strong style="color:var(--text)">Acclimatation passive.</strong> Marche très lente dans la vieille ville, max 1h. Observer les signaux du corps. Si maux de tête : repos supplémentaire.</span></div>
-        <div class="acclim-day"><span class="acclim-day-num">J3–4</span><span>Visites légères : Qorikancha, San Pedro, ruines proches. Montée progressive vers Sacsayhuamán (3 700 m) le J4.</span></div>
-        <div class="acclim-day"><span class="acclim-day-num">J5</span><span>Journée Pisac (3 076 m) — légèrement plus bas. Marché et ruines. Corps prêt pour Vinicunca.</span></div>
+        <div class="acclim-program-title">Programme — vigilance renforcée J9–J10</div>
+        <div class="acclim-day"><span class="acclim-day-num">J9</span><span><strong style="color:var(--text)">Repos total.</strong> Vol tôt le matin, arriver, s'allonger. Hydratation maximale, repas très léger. Thé de coca dès l'arrivée. Pas d'effort, pas d'alcool. Observer attentivement.</span></div>
+        <div class="acclim-day"><span class="acclim-day-num">J10</span><span><strong style="color:var(--text)">Acclimatation passive renforcée.</strong> Sortie courte uniquement si aucun symptôme. Balade 1h max en ville, aucun dénivelé. Si maux de tête : repos supplémentaire sans exception.</span></div>
+        <div class="acclim-day"><span class="acclim-day-num">J11</span><span>Visites légères : San Pedro, Qorikancha, ruelles. Montée douce vers Sacsayhuamán (3 700 m) en fin de matinée.</span></div>
+        <div class="acclim-day"><span class="acclim-day-num">J12</span><span>Randonnée légère Qenqo → Puca Pucara (3 600–3 800 m), 2–3h. Retour dormir à Cusco.</span></div>
+        <div class="acclim-day"><span class="acclim-day-num">J13</span><span>Excursion Pisac (3 076 m). Corps prêt pour Vinicunca.</span></div>
       </div>
       <div class="stop-highlights">
-        <div class="highlight"><span class="highlight-icon">🌅</span><span>Lever de soleil à Sacsayhuamán (J4) : panorama sur Cusco dans la brume matinale</span></div>
-        <div class="highlight"><span class="highlight-icon">🍽️</span><span>Dîner dans les picanterías locales : chiri uchu, adobo cusqueño, chicha de jora</span></div>
-        <div class="highlight"><span class="highlight-icon">🏛️</span><span>Qorikancha : le temple Inca du Soleil, autrefois recouvert de plaques d'or</span></div>
+        <div class="highlight"><span class="highlight-icon">🌅</span><span>Lever de soleil à Sacsayhuamán (J11) : panorama sur Cusco dans la brume matinale</span></div>
+        <div class="highlight"><span class="highlight-icon">🍽️</span><span>Marché San Pedro chaque matin : quinoa soupe, chicha morada, alpaca grillé</span></div>
+        <div class="highlight"><span class="highlight-icon">🏛️</span><span>Qorikancha : la superposition Inca–colonial la plus impressionnante de Cusco</span></div>
       </div>
-      <div class="stop-tags"><span class="tag">acclimatation</span><span class="tag">patrimoine Inca</span><span class="tag">gastronomie</span></div>
+      <div class="stop-tags"><span class="tag">acclimatation</span><span class="tag">sites Incas</span><span class="tag">gastronomie</span><span class="tag">vigilance renforcée</span></div>
     </div></div>
 
+    <!-- Vinicunca -->
     <div class="stop"><div class="stop-left"><div class="dot mustdo"></div></div><div class="stop-card mustdo">
       <div class="mustdo-badge">★ INCONTOURNABLE</div>
-      <div class="stop-header"><div class="stop-name">Vinicunca — Montagne Arc-en-ciel</div><span class="stop-days">2 jours</span></div>
-      <div class="stop-meta"><span class="alt-badge high">⚡ 5 050 m — excursion, pas de nuit</span></div>
-      <div class="stop-desc">Après 5 jours d'acclimatation à Cusco, le corps est prêt. Départ 4h du matin, trek depuis 4 600 m jusqu'au sommet coloré à 5 050 m. Rentrer dormir à Cusco (3 400 m). Le lendemain : repos absolu avant de descendre en Vallée Sacrée.</div>
+      <div class="stop-header"><div class="stop-name">Vinicunca — Montagne Arc-en-ciel</div><span class="stop-days">2 jours · J14–15</span></div>
+      <div class="stop-meta"><span class="alt-badge high">⚡ 5 050 m — excursion J14, pas de nuit</span></div>
+      <div class="stop-desc">Après 5 jours d'acclimatation à Cusco, l'excursion Vinicunca est accessible. Départ 4h du matin, trek depuis 4 600 m jusqu'au sommet coloré à 5 050 m. Retour dormir à Cusco (3 400 m). J15 : repos complet avant la descente en Vallée Sacrée.</div>
       <div class="stop-highlights">
         <div class="highlight"><span class="highlight-icon">🌈</span><span>Vinicunca à l'aube : bandes minérales rouge-vert-jaune-violet sur fond de neiges éternelles de l'Ausangate</span></div>
-        <div class="highlight"><span class="highlight-icon">🏔</span><span>Vue sur le Nevado Ausangate (6 384 m) — le toit du sud du Pérou</span></div>
-        <div class="highlight"><span class="highlight-icon">💤</span><span>J+1 repos complet à Cusco — essentiel pour récupérer avant la Vallée Sacrée</span></div>
+        <div class="highlight"><span class="highlight-icon">🏔</span><span>Nevado Ausangate (6 384 m) : le géant enneigé qui domine toute la région</span></div>
+        <div class="highlight"><span class="highlight-icon">💤</span><span>J15 repos complet à Cusco — essentiel avant la Vallée Sacrée</span></div>
       </div>
       <div class="stop-tags"><span class="tag">🌈 arc-en-ciel</span><span class="tag">5 050 m excursion</span><span class="tag">Ausangate</span></div>
     </div></div>
 
+    <!-- Vallée Sacrée -->
     <div class="stop"><div class="stop-left"><div class="dot mustdo"></div></div><div class="stop-card mustdo">
       <div class="mustdo-badge">★ INCONTOURNABLE</div>
-      <div class="stop-header"><div class="stop-name">Vallée Sacrée & Machu Picchu</div><span class="stop-days">12 jours</span></div>
+      <div class="stop-header"><div class="stop-name">Vallée Sacrée & Machu Picchu</div><span class="stop-days">13 jours · J16–28</span></div>
       <div class="stop-meta"><span class="alt-badge low">🏔 2 792 m Ollantaytambo · 2 040 m Aguas Calientes</span></div>
-      <div class="stop-desc">Descente à 2 800 m après Cusco : le corps respire mieux et peut randonner à pleine puissance. Base fixe à Ollantaytambo pour 9 jours, puis 3 jours à Aguas Calientes pour Machu Picchu. À ce stade du voyage, 2 430 m semble presque au niveau de la mer.</div>
-      <div class="stop-highlights">
-        <div class="highlight"><span class="highlight-icon">🏛️</span><span>Machu Picchu à 5h30 : la cité dans les nuages avant la foule — moment suspendu dans le temps</span></div>
-        <div class="highlight"><span class="highlight-icon">🥾</span><span>Montaña Machu Picchu (3 082 m) : vue plongeante et aérienne complète sur la citadelle</span></div>
-        <div class="highlight"><span class="highlight-icon">🥾</span><span>Randonnée Pumamarca : vues à 360° sur la Vallée Sacrée (5–6h depuis Ollantaytambo)</span></div>
-        <div class="highlight"><span class="highlight-icon">🥾</span><span>Circuit Moray–Maras–Chinchero en vélo : terrasses circulaires Incas et salines millénaires</span></div>
-        <div class="highlight"><span class="highlight-icon">🍽️</span><span>Marché dominical de Pisac : le meilleur marché de la Vallée Sacrée</span></div>
-      </div>
-      <div class="stop-tags"><span class="tag">🏛️ Machu Picchu</span><span class="tag">patrimoine UNESCO</span><span class="tag">randonnée</span><span class="tag">vélo</span><span class="tag">base fixe</span></div>
-    </div></div>
-
-    <div class="stop"><div class="stop-left"><div class="dot mustdo"></div></div><div class="stop-card mustdo">
-      <div class="mustdo-badge">★ INCONTOURNABLE</div>
-      <div class="stop-header"><div class="stop-name">Canyon del Colca — Chivay</div><span class="stop-days">4 jours</span></div>
-      <div class="stop-meta"><span class="alt-badge mid">🦅 3 635 m</span><span class="acclim-badge-sm">Palier 2 — corps parfaitement adapté</span></div>
-      <div class="stop-desc">Bus Cusco → Puno → Chivay. Après presque un mois d'acclimatation, 3 635 m est une altitude confortable. Cruz del Condor à l'aube pour les condors, trek 2 jours dans le fond du canyon, bains thermaux.</div>
-      <div class="stop-highlights">
-        <div class="highlight"><span class="highlight-icon">🦅</span><span>Cruz del Condor à 7h : les condors s'élèvent en spirale dans les thermiques matinales</span></div>
-        <div class="highlight"><span class="highlight-icon">🥾</span><span>Descente dans le canyon jusqu'à Sangalle (oasis à 1 050 m plus bas), nuit, remontée le lendemain</span></div>
-        <div class="highlight"><span class="highlight-icon">🍽️</span><span>Bains thermaux de La Calera après le trek — récupération au bord de la rivière</span></div>
-      </div>
-      <div class="stop-tags"><span class="tag">🦅 condors</span><span class="tag">canyon</span><span class="tag">trek</span><span class="tag">panoramas</span></div>
-    </div></div>
-
-    <div class="stop"><div class="stop-left"><div class="dot"></div></div><div class="stop-card acclim">
-      <div class="stop-header"><div class="stop-name">Lac Titicaca — Puno & îles</div><span class="stop-days">5 jours</span></div>
-      <div class="stop-meta"><span class="alt-badge mid">🌊 3 812 m — nuit la plus haute</span><span class="acclim-badge-sm">Palier final — 4 semaines d'adaptation derrière vous</span></div>
-      <div class="stop-desc">Le Titicaca en toute confiance après presque 5 semaines. La nuit à 3 812 m passe comme une nuit normale à ce stade. Homestay sur Amantaní pour la lumière du matin sur le lac — l'une des plus belles expériences du voyage.</div>
-      <div class="stop-highlights">
-        <div class="highlight"><span class="highlight-icon">🌅</span><span>Lever de soleil depuis Amantaní (4 100 m) : lumière dorée sur le lac le plus haut du monde</span></div>
-        <div class="highlight"><span class="highlight-icon">🥾</span><span>Randonnée sur Taquile : chemins Incas entre terrasses et villages de tisserands</span></div>
-        <div class="highlight"><span class="highlight-icon">🍽️</span><span>Dîner et nuit chez l'habitant sur Amantaní : trucha du lac, quinoa, hospitalité Aymara</span></div>
-      </div>
-      <div class="stop-tags"><span class="tag">Titicaca</span><span class="tag">homestay</span><span class="tag">culture Aymara</span><span class="tag">lever de soleil</span></div>
-    </div></div>
-
-  </div>
-  <div class="total-bar">
-    <span>⏱ Total : ~36 jours</span>
-    <span>✈️ Arrivée Lima / Départ Puno (ou Lima)</span>
-    <span>✈️ 2 vols internes (Lima→P. Maldonado, P. Maldonado→Cusco)</span>
-    <span>🚌 4 déplacements terrestres</span>
-    <span>🌿 Amazonie · 🌈 Vinicunca · 🏛️ Machu Picchu · 🦅 Colca · 🌊 Titicaca</span>
-  </div>
-</div>
-
-<!-- ══════════════════════════════════
-  ITINÉRAIRE 3 — Circuit Complet Sud
-  Lima → Cusco → Vinicunca → Vallée Sacrée → Machu Picchu → Puno/Titicaca → Colca → Arequipa
-  Variante : Titicaca AVANT Colca, puis descente à Arequipa
-  ~35 jours
-══════════════════════════════════ -->
-<div class="itinerary it3" id="it3">
-  <div class="intro">Circuit bouclé du sud du Pérou, avec une variante d'acclimatation intéressante : Puno et le Titicaca avant le Canyon del Colca, puis descente finale à Arequipa (2 335 m) pour souffler. Idéal pour qui repart depuis Arequipa ou prolonge vers la Bolivie. <strong>Meilleure saison : mai à novembre.</strong></div>
-
-  <div class="timeline">
-
-    <div class="stop"><div class="stop-left"><div class="dot"></div></div><div class="stop-card">
-      <div class="stop-header"><div class="stop-name">Lima</div><span class="stop-days">3 jours</span></div>
-      <div class="stop-meta"><span class="alt-badge low">🌊 0 m</span><span class="acclim-badge-sm">Point de départ idéal</span></div>
-      <div class="stop-desc">Arrivée, gastronomie, repos. L'essentiel en 3 jours avant de monter dans les Andes.</div>
-      <div class="stop-highlights">
-        <div class="highlight"><span class="highlight-icon">🍽️</span><span>Ceviche et leche de tigre au marché de Surquillo — entrée en matière parfaite</span></div>
-        <div class="highlight"><span class="highlight-icon">🌅</span><span>Coucher de soleil sur le Pacifique depuis les falaises de Miraflores</span></div>
-        <div class="highlight"><span class="highlight-icon">🏛️</span><span>Musée Larco : préparer le voyage intellectuellement avec 5 000 ans d'histoire</span></div>
-      </div>
-      <div class="stop-tags"><span class="tag">gastronomie</span><span class="tag">côte Pacifique</span></div>
-    </div></div>
-
-    <div class="stop"><div class="stop-left"><div class="dot"></div></div><div class="stop-card acclim">
-      <div class="stop-header"><div class="stop-name">Cusco — acclimatation</div><span class="stop-days">5 jours</span></div>
-      <div class="stop-meta"><span class="alt-badge mid">🏔 3 400 m</span><span class="acclim-badge-sm">Palier 1 — structure identique</span></div>
-      <div class="stop-desc">Même programme d'acclimatation rigoureux : repos strict J1, acclimatation progressive J2–J4, excursion Pisac J5. Le corps doit être prêt avant Vinicunca.</div>
+      <div class="stop-desc">Descente à 2 800 m depuis Cusco : soulagement immédiat, pleine capacité physique. Base fixe à Ollantaytambo pour 10 jours, puis 3 jours à Aguas Calientes pour Machu Picchu. À ce stade du voyage — J16 — le corps est dans sa meilleure forme depuis le départ. Le moment idéal pour randonner fort.</div>
       <div class="acclim-program">
-        <div class="acclim-program-title">Programme d'acclimatation</div>
-        <div class="acclim-day"><span class="acclim-day-num">J1</span><span>Repos strict, hydratation, repas léger, thé de coca. Pas d'effort.</span></div>
-        <div class="acclim-day"><span class="acclim-day-num">J2</span><span>Balade très légère en ville. San Pedro, Plaza de Armas. Observer les signaux du corps.</span></div>
-        <div class="acclim-day"><span class="acclim-day-num">J3–4</span><span>Sacsayhuamán (3 700 m) au lever du soleil. Retour lent. Sites proches l'après-midi.</span></div>
-        <div class="acclim-day"><span class="acclim-day-num">J5</span><span>Pisac (3 076 m) — journée légèrement plus basse. Corps prêt pour Vinicunca.</span></div>
+        <div class="acclim-program-title">Séquence des 13 jours</div>
+        <div class="acclim-day"><span class="acclim-day-num">J16–17</span><span>Arrivée à Ollantaytambo. Descente = soulagement. Randonnée légère, lever de soleil sur les terrasses.</span></div>
+        <div class="acclim-day"><span class="acclim-day-num">J18–21</span><span>Randonnées fortes : Pumamarca (360°, 5–6h), Pisac ruines, Chinchero, circuit Moray–Maras–Salines en vélo.</span></div>
+        <div class="acclim-day"><span class="acclim-day-num">J22–23</span><span>Journées douces : marché dominical de Pisac (J23 si dimanche), exploration Ollantaytambo profonde.</span></div>
+        <div class="acclim-day"><span class="acclim-day-num">J24–26</span><span><strong style="color:var(--text)">Machu Picchu.</strong> Train, nuit Aguas Calientes. Entrée à 5h30 J25. Sun Gate ou Montaña J26.</span></div>
+        <div class="acclim-day"><span class="acclim-day-num">J27–28</span><span>Retour Ollantaytambo puis Cusco. Nuit à Cusco, transition vers Colca.</span></div>
       </div>
       <div class="stop-highlights">
-        <div class="highlight"><span class="highlight-icon">🌅</span><span>Lever de soleil à Sacsayhuamán (J4) : la ville Inca dans la brume, premier grand moment</span></div>
-        <div class="highlight"><span class="highlight-icon">🍽️</span><span>Marché San Pedro : petit-déjeuner local authentique chaque matin</span></div>
-        <div class="highlight"><span class="highlight-icon">🏛️</span><span>Qorikancha et musée Inka : comprendre l'Empire avant de visiter ses sites</span></div>
-      </div>
-      <div class="stop-tags"><span class="tag">acclimatation</span><span class="tag">sites Incas</span><span class="tag">gastronomie</span></div>
-    </div></div>
-
-    <div class="stop"><div class="stop-left"><div class="dot mustdo"></div></div><div class="stop-card mustdo">
-      <div class="mustdo-badge">★ INCONTOURNABLE</div>
-      <div class="stop-header"><div class="stop-name">Vinicunca — Montagne Arc-en-ciel</div><span class="stop-days">2 jours</span></div>
-      <div class="stop-meta"><span class="alt-badge high">⚡ 5 050 m — excursion, pas de nuit</span></div>
-      <div class="stop-desc">Après 5 jours à Cusco, l'excursion Vinicunca est accessible. Départ 4h, arrivée au point de départ du trek (4 600 m), montée 4 km jusqu'au sommet. Vue sur les couleurs minérales et l'Ausangate. Retour dormir à Cusco. Jour suivant : repos avant Vallée Sacrée.</div>
-      <div class="stop-highlights">
-        <div class="highlight"><span class="highlight-icon">🌈</span><span>Vinicunca : les couches de minéraux révèlent rouge-bordeaux, vert émeraude, jaune, violet — unique au monde</span></div>
-        <div class="highlight"><span class="highlight-icon">🏔</span><span>Nevado Ausangate (6 384 m) : géant enneigé qui domine toute la région</span></div>
-        <div class="highlight"><span class="highlight-icon">💤</span><span>Repos J+1 à Cusco — indispensable avant la Vallée Sacrée</span></div>
-      </div>
-      <div class="stop-tags"><span class="tag">🌈 arc-en-ciel</span><span class="tag">5 050 m excursion</span><span class="tag">minéraux</span></div>
-    </div></div>
-
-    <div class="stop"><div class="stop-left"><div class="dot mustdo"></div></div><div class="stop-card mustdo">
-      <div class="mustdo-badge">★ INCONTOURNABLE</div>
-      <div class="stop-header"><div class="stop-name">Vallée Sacrée & Machu Picchu</div><span class="stop-days">12 jours</span></div>
-      <div class="stop-meta"><span class="alt-badge low">🏔 2 792 m Ollantaytambo · 2 040 m Aguas Calientes</span></div>
-      <div class="stop-desc">Descente salutaire à 2 800 m. Corps adapté, capacité physique au maximum. Base Ollantaytambo pour 9 jours — le meilleur spot pour randonner dans toute la région. Puis 3 jours Machu Picchu depuis Aguas Calientes.</div>
-      <div class="stop-highlights">
-        <div class="highlight"><span class="highlight-icon">🏛️</span><span>Machu Picchu à l'ouverture (5h30) : la cité dans les nuages, avant toute foule — inégalable</span></div>
+        <div class="highlight"><span class="highlight-icon">🏛️</span><span>Machu Picchu à l'ouverture (5h30) : la cité dans les nuages avant toute foule — inégalable</span></div>
         <div class="highlight"><span class="highlight-icon">🥾</span><span>Sun Gate (Inti Punku) : vue plongeante sur la citadelle depuis le chemin Inca historique</span></div>
-        <div class="highlight"><span class="highlight-icon">🥾</span><span>Randonnée Pumamarca (5–6h) : panorama à 360° sur toute la Vallée Sacrée</span></div>
-        <div class="highlight"><span class="highlight-icon">🌅</span><span>Lever de soleil sur les terrasses d'Ollantaytambo avant l'ouverture (départ 5h30)</span></div>
-        <div class="highlight"><span class="highlight-icon">🍽️</span><span>Marché dominical de Pisac : produits et artisanat Quechua, cuisines communautaires</span></div>
+        <div class="highlight"><span class="highlight-icon">🥾</span><span>Pumamarca (5–6h) : vues à 360° sur toute la Vallée Sacrée depuis les crêtes</span></div>
+        <div class="highlight"><span class="highlight-icon">🌅</span><span>Lever de soleil sur les terrasses d'Ollantaytambo avant l'ouverture officielle</span></div>
+        <div class="highlight"><span class="highlight-icon">🍽️</span><span>Marché dominical de Pisac : le meilleur marché de la Vallée Sacrée</span></div>
       </div>
       <div class="stop-tags"><span class="tag">🏛️ Machu Picchu</span><span class="tag">patrimoine UNESCO</span><span class="tag">randonnée</span><span class="tag">base fixe</span></div>
     </div></div>
 
-    <div class="stop"><div class="stop-left"><div class="dot"></div></div><div class="stop-card acclim">
-      <div class="stop-header"><div class="stop-name">Lac Titicaca — Puno & îles</div><span class="stop-days">5 jours</span></div>
-      <div class="stop-meta"><span class="alt-badge mid">🌊 3 812 m</span><span class="acclim-badge-sm">Palier 2 — après 3 semaines d'adaptation</span></div>
-      <div class="stop-desc">Bus Cusco → Puno en longeant le lac. Placé avant le Canyon del Colca dans cet itinéraire : après 3 semaines d'acclimatation, 3 812 m est bien géré. Nuit en homestay sur Amantaní, randonnée sur Taquile, lever de soleil sur le lac.</div>
-      <div class="stop-highlights">
-        <div class="highlight"><span class="highlight-icon">🌅</span><span>Lever de soleil depuis le sommet d'Amantaní (4 100 m) : vue sur tout le lac dans la lumière rasante</span></div>
-        <div class="highlight"><span class="highlight-icon">🥾</span><span>Randonnée sur Taquile : île UNESCO, chemins Incas entre terrasses agricoles et villages</span></div>
-        <div class="highlight"><span class="highlight-icon">🍽️</span><span>Repas chez l'habitant sur Amantaní : trucha fraîche, quinoa, fèves — hospitalité Aymara</span></div>
-      </div>
-      <div class="stop-tags"><span class="tag">Titicaca</span><span class="tag">homestay</span><span class="tag">culture Aymara</span><span class="tag">lever de soleil</span></div>
-    </div></div>
-
+    <!-- Canyon del Colca -->
     <div class="stop"><div class="stop-left"><div class="dot mustdo"></div></div><div class="stop-card mustdo">
       <div class="mustdo-badge">★ INCONTOURNABLE</div>
-      <div class="stop-header"><div class="stop-name">Canyon del Colca — Chivay</div><span class="stop-days">4 jours</span></div>
-      <div class="stop-meta"><span class="alt-badge mid">🦅 3 635 m</span><span class="acclim-badge-sm">Corps en pleine forme après 4 semaines</span></div>
-      <div class="stop-desc">Bus Puno → Chivay. Après 4 semaines d'altitude, le trek dans le canyon est abordable sans difficulté. Descente 1 200 m dans l'un des plus profonds canyons du monde, nuit à l'oasis de Sangalle, remontée à l'aube, puis Cruz del Condor.</div>
+      <div class="stop-header"><div class="stop-name">Canyon del Colca — Chivay</div><span class="stop-days">4 jours · J29–32</span></div>
+      <div class="stop-meta"><span class="alt-badge mid">🦅 3 635 m</span><span class="acclim-badge-sm">Palier 2 — corps parfaitement rodé</span></div>
+      <div class="stop-desc">Bus Cusco → Chivay. Après presque un mois d'acclimatation progressive, 3 635 m est une altitude confortable. Cruz del Condor à l'aube, trek 2 nuits dans le fond du canyon, bains thermaux.</div>
       <div class="stop-highlights">
-        <div class="highlight"><span class="highlight-icon">🦅</span><span>Cruz del Condor à 7h : condors des Andes planant silencieusement dans les thermiques</span></div>
-        <div class="highlight"><span class="highlight-icon">🥾</span><span>Trek 2 nuits : descente jusqu'à Sangalle, nuit en oasis au fond du canyon, remontée</span></div>
-        <div class="highlight"><span class="highlight-icon">🌅</span><span>Lever de soleil depuis le fond du canyon : parois de basalte qui s'embrasent</span></div>
-        <div class="highlight"><span class="highlight-icon">🍽️</span><span>Bains thermaux de La Calera : récupération méritée après le trek</span></div>
+        <div class="highlight"><span class="highlight-icon">🦅</span><span>Cruz del Condor à 7h : condors des Andes en spirale silencieuse dans les thermiques matinales</span></div>
+        <div class="highlight"><span class="highlight-icon">🥾</span><span>Trek 2 nuits : descente Sangalle, nuit en oasis, remontée à l'aube — 1 200 m de dénivelé</span></div>
+        <div class="highlight"><span class="highlight-icon">🌅</span><span>Lever de soleil depuis le fond du canyon : parois de basalte qui s'embrasent progressivement</span></div>
+        <div class="highlight"><span class="highlight-icon">🍽️</span><span>Bains thermaux naturels de La Calera — récupération méritée après le trek</span></div>
       </div>
       <div class="stop-tags"><span class="tag">🦅 condors</span><span class="tag">canyon</span><span class="tag">trek 2 nuits</span><span class="tag">panoramas</span></div>
     </div></div>
 
-    <div class="stop"><div class="stop-left"><div class="dot"></div></div><div class="stop-card">
-      <div class="stop-header"><div class="stop-name">Arequipa — départ</div><span class="stop-days">4 jours</span></div>
-      <div class="stop-meta"><span class="alt-badge low">🌋 2 335 m — descente finale bienvenue</span></div>
-      <div class="stop-desc">Conclusion parfaite à 2 335 m : le corps apprécie la descente après le Titicaca et Colca. Ciudad Blanca, gastronomie, architecture coloniale. 4 jours pour profiter sans contrainte d'altitude avant le vol retour.</div>
+    <!-- Titicaca -->
+    <div class="stop"><div class="stop-left"><div class="dot"></div></div><div class="stop-card acclim-card">
+      <div class="stop-header"><div class="stop-name">Lac Titicaca — Puno & îles</div><span class="stop-days">5 jours · J33–37</span></div>
+      <div class="stop-meta"><span class="alt-badge mid">🌊 3 812 m — nuit la plus haute, en toute confiance</span><span class="acclim-badge-sm">Palier final — 5 semaines d'adaptation</span></div>
+      <div class="stop-desc">Le Titicaca en clôture, après presque 5 semaines d'altitude progressive. La nuit à 3 812 m passe comme une nuit ordinaire à ce stade. Homestay obligatoire sur Amantaní pour le lever de soleil sur le lac — l'une des plus belles expériences photographiques du voyage.</div>
       <div class="stop-highlights">
-        <div class="highlight"><span class="highlight-icon">🌋</span><span>Panorama sur le volcan Misti (5 822 m) depuis les terrasses de la ville</span></div>
-        <div class="highlight"><span class="highlight-icon">🍽️</span><span>Rocoto relleno, adobo arequipeño et chupe de camarones — gastronomie locale parmi les meilleures du Pérou</span></div>
-        <div class="highlight"><span class="highlight-icon">🏛️</span><span>Monastère Santa Catalina : ville dans la ville, ruelles colorées et cloîtres baroques</span></div>
+        <div class="highlight"><span class="highlight-icon">🌅</span><span>Lever de soleil depuis Amantaní (4 100 m) : lumière dorée sur le lac le plus haut du monde</span></div>
+        <div class="highlight"><span class="highlight-icon">🥾</span><span>Randonnée sur Taquile : chemins Incas entre terrasses, île classée UNESCO pour son tissage</span></div>
+        <div class="highlight"><span class="highlight-icon">🍽️</span><span>Dîner et nuit chez l'habitant sur Amantaní : trucha du lac, quinoa, hospitalité Aymara</span></div>
+        <div class="highlight"><span class="highlight-icon">🏛️</span><span>Îles flottantes des Uros le matin tôt : construites en totora (roseau), habitées en permanence</span></div>
       </div>
-      <div class="stop-tags"><span class="tag">volcans</span><span class="tag">gastronomie</span><span class="tag">architecture</span></div>
+      <div class="stop-tags"><span class="tag">Titicaca</span><span class="tag">homestay</span><span class="tag">culture Aymara</span><span class="tag">lever de soleil</span><span class="tag">3 812 m</span></div>
     </div></div>
 
   </div>
   <div class="total-bar">
-    <span>⏱ Total : ~35 jours</span>
-    <span>✈️ Arrivée Lima / Départ Arequipa</span>
-    <span>✈️ 1 vol interne Lima→Cusco</span>
-    <span>🚌 6 déplacements terrestres</span>
-    <span>🌈 Vinicunca J9 · 🏛️ Machu Picchu J19–21 · 🌊 Titicaca J22–26 · 🦅 Colca J27–30</span>
+    <span>⏱ 37 jours</span>
+    <span>✈️ Arrivée Lima / Départ Puno (ou Lima via vol interne)</span>
+    <span>✈️ 2 vols internes (Lima→Puerto Maldonado, Puerto Maldonado→Cusco)</span>
+    <span>🚌 4 déplacements terrestres</span>
+    <span>🫁 Progression : 0→250→3400→2792→2040→3635→3812 m</span>
   </div>
 </div>
 
@@ -599,50 +528,80 @@
 const VINICUNCA = { name:'Vinicunca — Rainbow Mountain', alt:'5 050 m', lat:-13.6600, lng:-71.3100 };
 
 const itineraries = {
-  1:{color:'#c8833a',stops:[
-    {name:'Lima',days:'3 jours',alt:'0 m',altClass:'low',lat:-12.0464,lng:-77.0428,icon:'🌊'},
-    {name:'Cusco + Vinicunca',days:'7 jours',alt:'3 400–5 050 m',altClass:'mid',lat:-13.5319,lng:-71.9675,icon:'🏔',mustdo:true,mustdoLabel:'🌈 Arc-en-ciel · acclimatation'},
-    {name:'Ollantaytambo — Vallée Sacrée',days:'10 jours',alt:'2 792 m',altClass:'low',lat:-13.2592,lng:-72.2627,icon:'🏔'},
-    {name:'Machu Picchu',days:'3 jours',alt:'2 430 m',altClass:'low',lat:-13.1631,lng:-72.5450,icon:'🏛️',mustdo:true,mustdoLabel:'🏛️ Machu Picchu'},
-    {name:'Chivay — Canyon del Colca',days:'5 jours',alt:'3 635 m',altClass:'mid',lat:-15.6333,lng:-71.6000,icon:'🦅',mustdo:true,mustdoLabel:'🦅 Condors'},
-    {name:'Puno — Lac Titicaca',days:'5 jours',alt:'3 812 m',altClass:'mid',lat:-15.8402,lng:-70.0219,icon:'🌊'},
-    {name:'Arequipa',days:'3 jours',alt:'2 335 m',altClass:'low',lat:-16.4090,lng:-71.5375,icon:'🌋'},
+  1: { color:'#c8833a', stops:[
+    {name:'Lima',          days:'3j',  alt:'0 m',     altClass:'low', lat:-12.0464, lng:-77.0428, icon:'🌊'},
+    {name:'Cusco',         days:'5j',  alt:'3 400 m', altClass:'mid', lat:-13.5319, lng:-71.9675, icon:'🏔', acclim:true},
+    {name:'Vinicunca',     days:'2j',  alt:'5 050 m', altClass:'high',lat:-13.6600, lng:-71.3100, icon:'🌈', mustdo:true, mustdoLabel:'🌈 Arc-en-ciel', excursion:true},
+    {name:'Ollantaytambo', days:'10j', alt:'2 792 m', altClass:'low', lat:-13.2592, lng:-72.2627, icon:'🏔'},
+    {name:'Machu Picchu',  days:'3j',  alt:'2 040 m', altClass:'low', lat:-13.1631, lng:-72.5450, icon:'🏛️', mustdo:true, mustdoLabel:'🏛️ Machu Picchu'},
+    {name:'Colca',         days:'4j',  alt:'3 635 m', altClass:'mid', lat:-15.6333, lng:-71.6000, icon:'🦅', mustdo:true, mustdoLabel:'🦅 Condors'},
+    {name:'Titicaca',      days:'5j',  alt:'3 812 m', altClass:'mid', lat:-15.8402, lng:-70.0219, icon:'🌊'},
+    {name:'Arequipa',      days:'3j',  alt:'2 335 m', altClass:'low', lat:-16.4090, lng:-71.5375, icon:'🌋'},
   ]},
-  2:{color:'#6db89a',stops:[
-    {name:'Lima',days:'3 jours',alt:'0 m',altClass:'low',lat:-12.0464,lng:-77.0428,icon:'🌊'},
-    {name:'Puerto Maldonado',days:'5 jours',alt:'250 m',altClass:'low',lat:-12.5931,lng:-69.1889,icon:'🌿'},
-    {name:'Cusco + Vinicunca',days:'7 jours',alt:'3 400–5 050 m',altClass:'mid',lat:-13.5319,lng:-71.9675,icon:'🏔',mustdo:true,mustdoLabel:'🌈 Arc-en-ciel · acclimatation'},
-    {name:'Ollantaytambo — Vallée Sacrée',days:'9 jours',alt:'2 792 m',altClass:'low',lat:-13.2592,lng:-72.2627,icon:'🏔'},
-    {name:'Machu Picchu',days:'3 jours',alt:'2 430 m',altClass:'low',lat:-13.1631,lng:-72.5450,icon:'🏛️',mustdo:true,mustdoLabel:'🏛️ Machu Picchu'},
-    {name:'Chivay — Canyon del Colca',days:'4 jours',alt:'3 635 m',altClass:'mid',lat:-15.6333,lng:-71.6000,icon:'🦅',mustdo:true,mustdoLabel:'🦅 Condors'},
-    {name:'Puno — Lac Titicaca',days:'5 jours',alt:'3 812 m',altClass:'mid',lat:-15.8402,lng:-70.0219,icon:'🌊'},
-  ]},
-  3:{color:'#9b7ec8',stops:[
-    {name:'Lima',days:'3 jours',alt:'0 m',altClass:'low',lat:-12.0464,lng:-77.0428,icon:'🌊'},
-    {name:'Cusco + Vinicunca',days:'7 jours',alt:'3 400–5 050 m',altClass:'mid',lat:-13.5319,lng:-71.9675,icon:'🏔',mustdo:true,mustdoLabel:'🌈 Arc-en-ciel · acclimatation'},
-    {name:'Ollantaytambo — Vallée Sacrée',days:'9 jours',alt:'2 792 m',altClass:'low',lat:-13.2592,lng:-72.2627,icon:'🏔'},
-    {name:'Machu Picchu',days:'3 jours',alt:'2 430 m',altClass:'low',lat:-13.1631,lng:-72.5450,icon:'🏛️',mustdo:true,mustdoLabel:'🏛️ Machu Picchu'},
-    {name:'Puno — Lac Titicaca',days:'5 jours',alt:'3 812 m',altClass:'mid',lat:-15.8402,lng:-70.0219,icon:'🌊'},
-    {name:'Chivay — Canyon del Colca',days:'4 jours',alt:'3 635 m',altClass:'mid',lat:-15.6333,lng:-71.6000,icon:'🦅',mustdo:true,mustdoLabel:'🦅 Condors'},
-    {name:'Arequipa',days:'4 jours',alt:'2 335 m',altClass:'low',lat:-16.4090,lng:-71.5375,icon:'🌋'},
+  2: { color:'#6db89a', stops:[
+    {name:'Lima',             days:'3j',  alt:'0 m',     altClass:'low', lat:-12.0464, lng:-77.0428, icon:'🌊'},
+    {name:'Puerto Maldonado', days:'5j',  alt:'250 m',   altClass:'low', lat:-12.5931, lng:-69.1889, icon:'🌿'},
+    {name:'Cusco',            days:'5j',  alt:'3 400 m', altClass:'mid', lat:-13.5319, lng:-71.9675, icon:'🏔', acclim:true},
+    {name:'Vinicunca',        days:'2j',  alt:'5 050 m', altClass:'high',lat:-13.6600, lng:-71.3100, icon:'🌈', mustdo:true, mustdoLabel:'🌈 Arc-en-ciel', excursion:true},
+    {name:'Ollantaytambo',    days:'10j', alt:'2 792 m', altClass:'low', lat:-13.2592, lng:-72.2627, icon:'🏔'},
+    {name:'Machu Picchu',     days:'3j',  alt:'2 040 m', altClass:'low', lat:-13.1631, lng:-72.5450, icon:'🏛️', mustdo:true, mustdoLabel:'🏛️ Machu Picchu'},
+    {name:'Colca',            days:'4j',  alt:'3 635 m', altClass:'mid', lat:-15.6333, lng:-71.6000, icon:'🦅', mustdo:true, mustdoLabel:'🦅 Condors'},
+    {name:'Titicaca',         days:'5j',  alt:'3 812 m', altClass:'mid', lat:-15.8402, lng:-70.0219, icon:'🌊'},
   ]}
 };
 
-function altColor(cls){ return cls==='low'?'#6db89a':cls==='high'?'#e05c5c':'#c8833a'; }
+// Altitude en mètres pour chaque étape (pour les barres)
+const altMeters = {'0 m':0,'250 m':250,'2 040 m':2040,'2 792 m':2792,'2 040 m':2040,'3 400 m':3400,'5 050 m':5050,'3 635 m':3635,'3 812 m':3812,'2 335 m':2335};
+const altColors = {low:'#6db89a', mid:'#c8833a', high:'#e05c5c'};
 
+function parseAlt(str){ return parseInt(str.replace(/[^0-9]/g,''))||0; }
+
+function buildAltBars(n){
+  const it = itineraries[n];
+  const maxAlt = 5050;
+  const container = document.getElementById('alt-steps-'+n);
+  if(!container) return;
+  container.innerHTML = '';
+  it.stops.forEach((s,i)=>{
+    const m = parseAlt(s.alt);
+    const h = Math.max(4, Math.round((m/maxAlt)*40));
+    const col = altColors[s.altClass];
+    const div = document.createElement('div');
+    div.className = 'alt-step';
+    div.innerHTML = `
+      <div style="position:relative;width:100%;display:flex;flex-direction:column;align-items:center;">
+        ${s.excursion ? `<div class="excursion-marker">↑${s.icon}</div>` : ''}
+        <div class="alt-step-bar" style="height:${h}px;background:${col};opacity:${s.excursion?0.5:0.85};"></div>
+      </div>
+      <div class="alt-step-name" style="color:${s.mustdo||s.acclim?col:''}">${s.name}</div>
+      <div class="alt-step-m ${s.altClass}">${s.alt}</div>
+      <div class="alt-step-days">${s.days}</div>
+    `;
+    container.appendChild(div);
+    if(i < it.stops.length-1){
+      const arr = document.createElement('div');
+      arr.className='alt-arrow';
+      arr.textContent='›';
+      container.appendChild(arr);
+    }
+  });
+}
+
+// MAP
 const map = L.map('map',{zoomControl:true,scrollWheelZoom:false,attributionControl:false});
 L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png',{subdomains:'abcd',maxZoom:19}).addTo(map);
 L.control.attribution({position:'bottomright',prefix:false}).addAttribution('<span style="color:#5e5648;font-size:10px">© CartoDB · OpenStreetMap</span>').addTo(map);
 
 let activeMarkers=[],activeLine=null,viniMarker=null,viniLine=null;
 
-function mkIcon(color,num,isMustdo){
+function mkIcon(color,num,isMustdo,isAcclim){
   const s=isMustdo?32:28;
-  const star=isMustdo?`<div style="position:absolute;top:-5px;right:-5px;font-size:8px;background:#0e0c0a;border-radius:50%;width:13px;height:13px;display:flex;align-items:center;justify-content:center;color:${color};">★</div>`:'';
-  return L.divIcon({className:'',html:`<div style="position:relative;width:${s}px;height:${s}px;border-radius:50%;background:${color}${isMustdo?'28':'18'};border:${isMustdo?2.5:2}px solid ${color};color:${color};display:flex;align-items:center;justify-content:center;font-family:'DM Sans',sans-serif;font-size:11px;font-weight:600;box-shadow:0 2px 14px rgba(0,0,0,0.7);cursor:pointer;">${num}${star}</div>`,iconSize:[s,s],iconAnchor:[s/2,s/2],popupAnchor:[0,-s/2-4]});
+  const extra=isMustdo?`<div style="position:absolute;top:-5px;right:-5px;font-size:8px;background:#0e0c0a;border-radius:50%;width:13px;height:13px;display:flex;align-items:center;justify-content:center;color:${color};">★</div>`:
+              isAcclim?`<div style="position:absolute;top:-5px;right:-5px;font-size:8px;background:#0e0c0a;border-radius:50%;width:13px;height:13px;display:flex;align-items:center;justify-content:center;color:#6db89a;">+</div>`:'';
+  return L.divIcon({className:'',html:`<div style="position:relative;width:${s}px;height:${s}px;border-radius:50%;background:${color}${isMustdo?'28':'18'};border:${isMustdo?2.5:2}px solid ${color};color:${color};display:flex;align-items:center;justify-content:center;font-family:'DM Sans',sans-serif;font-size:11px;font-weight:600;box-shadow:0 2px 14px rgba(0,0,0,0.7);cursor:pointer;">${num}${extra}</div>`,iconSize:[s,s],iconAnchor:[s/2,s/2],popupAnchor:[0,-s/2-4]});
 }
 function mkViniIcon(color){
-  return L.divIcon({className:'',html:`<div style="width:24px;height:24px;border-radius:5px;background:rgba(255,255,255,0.05);border:1.5px dashed ${color};display:flex;align-items:center;justify-content:center;font-size:14px;box-shadow:0 2px 8px rgba(0,0,0,0.5);">🌈</div>`,iconSize:[24,24],iconAnchor:[12,12],popupAnchor:[0,-16]});
+  return L.divIcon({className:'',html:`<div style="width:24px;height:24px;border-radius:5px;background:rgba(255,255,255,0.05);border:1.5px dashed ${color};display:flex;align-items:center;justify-content:center;font-size:14px;box-shadow:0 2px 8px rgba(0,0,0,0.5);cursor:pointer;">🌈</div>`,iconSize:[24,24],iconAnchor:[12,12],popupAnchor:[0,-16]});
 }
 
 function updateMap(n){
@@ -653,33 +612,47 @@ function updateMap(n){
   activeMarkers=[];activeLine=null;viniMarker=null;viniLine=null;
 
   const it=itineraries[n];
-  const coords=it.stops.map(s=>[s.lat,s.lng]);
+  // Exclure Vinicunca de la ligne principale (c'est une excursion)
+  const mainStops = it.stops.filter(s=>!s.excursion);
+  const coords=mainStops.map(s=>[s.lat,s.lng]);
   activeLine=L.polyline(coords,{color:it.color,weight:2.5,opacity:0.5,dashArray:'7 7'}).addTo(map);
 
-  it.stops.forEach((s,i)=>{
-    const m=L.marker([s.lat,s.lng],{icon:mkIcon(it.color,i+1,!!s.mustdo)})
-      .bindPopup(`<div class="popup-name">${s.icon} ${s.name}</div><div class="popup-days">${s.days}</div><div class="popup-alt ${s.altClass}">⬆ ${s.alt}</div>${s.mustdo?`<div class="popup-mustdo">★ ${s.mustdoLabel}</div>`:''}`,{maxWidth:230})
+  let markerNum=1;
+  it.stops.forEach(s=>{
+    if(s.excursion) return; // Le marqueur Vinicunca est géré séparément
+    const m=L.marker([s.lat,s.lng],{icon:mkIcon(it.color,markerNum,!!s.mustdo,!!s.acclim)})
+      .bindPopup(`<div class="popup-name">${s.icon} ${s.name}</div><div class="popup-days">${s.days}</div><div class="popup-alt ${s.altClass}">⬆ ${s.alt}</div>${s.mustdo?`<div class="popup-mustdo">★ ${s.mustdoLabel}</div>`:''}${s.acclim?`<div class="popup-acclim">🫁 Phase d'acclimatation</div>`:''}`,{maxWidth:240})
       .addTo(map);
     activeMarkers.push(m);
+    markerNum++;
   });
 
-  // Vinicunca POI
+  // Vinicunca séparé
   viniMarker=L.marker([VINICUNCA.lat,VINICUNCA.lng],{icon:mkViniIcon(it.color)})
-    .bindPopup(`<div class="popup-name">🌈 ${VINICUNCA.name}</div><div class="popup-days">Excursion depuis Cusco</div><div class="popup-alt high">⬆ ${VINICUNCA.alt} — ne pas dormir là-haut</div><div class="popup-mustdo">★ INCONTOURNABLE</div>`,{maxWidth:230})
+    .bindPopup(`<div class="popup-name">🌈 ${VINICUNCA.name}</div><div class="popup-days">Excursion depuis Cusco</div><div class="popup-alt high">⬆ ${VINICUNCA.alt} — excursion uniquement</div><div class="popup-mustdo">★ INCONTOURNABLE</div>`,{maxWidth:240})
     .addTo(map);
   activeMarkers.push(viniMarker);
 
-  const cusco=it.stops.find(s=>s.name.includes('Cusco'));
+  const cusco=it.stops.find(s=>s.name==='Cusco');
   if(cusco){
     viniLine=L.polyline([[cusco.lat,cusco.lng],[VINICUNCA.lat,VINICUNCA.lng]],{color:it.color,weight:1.5,opacity:0.3,dashArray:'3 7'}).addTo(map);
     activeMarkers.push(viniLine);
   }
 
-  document.getElementById('map-legend').innerHTML=
-    it.stops.map((s,i)=>`<div class="legend-item">${s.mustdo?`<span style="color:${it.color};font-size:10px">★</span>`:`<div class="legend-dot" style="background:${altColor(s.altClass)}"></div>`}<span>${i+1}. ${s.name}</span></div>`).join('')+
-    `<div class="legend-item"><div class="legend-dot" style="background:${it.color};opacity:0.45"></div><span style="opacity:0.6">🌈 Vinicunca (excursion)</span></div>`;
+  const legendEl=document.getElementById('map-legend');
+  let legendHTML='';
+  let ln=1;
+  it.stops.forEach(s=>{
+    if(s.excursion) return;
+    const col=altColors[s.altClass];
+    legendHTML+=`<div class="legend-item">${s.mustdo?`<span style="color:${it.color};font-size:10px">★</span>`:s.acclim?`<span style="color:#6db89a;font-size:10px">🫁</span>`:`<div class="legend-dot" style="background:${col}"></div>`}<span>${ln}. ${s.name} <span style="color:${col}">${s.alt}</span></span></div>`;
+    ln++;
+  });
+  legendHTML+=`<div class="legend-item"><div class="legend-dot" style="background:${it.color};opacity:0.4"></div><span style="opacity:0.6">🌈 Vinicunca (excursion)</span></div>`;
+  legendEl.innerHTML=legendHTML;
 
-  map.fitBounds(L.latLngBounds([...coords,[VINICUNCA.lat,VINICUNCA.lng]]).pad(0.18));
+  const allCoords=[...coords,[VINICUNCA.lat,VINICUNCA.lng]];
+  map.fitBounds(L.latLngBounds(allCoords).pad(0.18));
 }
 
 function show(n){
@@ -691,12 +664,13 @@ function show(n){
 }
 
 function toggleAcclim(){
-  const body=document.getElementById('acclim-body');
-  const toggle=document.getElementById('acclim-toggle');
-  body.classList.toggle('open');
-  toggle.classList.toggle('open');
+  document.getElementById('acclim-body').classList.toggle('open');
+  document.getElementById('acclim-toggle').classList.toggle('open');
 }
 
+// Init
+buildAltBars(1);
+buildAltBars(2);
 updateMap(1);
 </script>
 </body>
