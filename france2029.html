@@ -53,8 +53,8 @@
   .legend-dot { width:9px; height:9px; border-radius:50%; flex-shrink:0; }
   .legend-title { font-size:10px; text-transform:uppercase; letter-spacing:0.06em; color:var(--text3); margin-bottom:2px; }
 
-  .tabs { max-width:820px; margin:16px auto 0; display:flex; gap:8px; flex-wrap:wrap; }
-  .tab-btn { padding:9px 16px; border-radius:100px; border:1.5px solid var(--border2); background:transparent; color:var(--text2); font-family:'DM Sans',sans-serif; font-size:12.5px; cursor:pointer; transition:all .22s; }
+  .tabs { max-width:820px; margin:20px auto 0; display:flex; gap:8px; flex-wrap:wrap; }
+  .tab-btn { padding:9px 16px; border-radius:100px; border:1.5px solid var(--border2); background:transparent; color:var(--text2); font-family:'DM Sans',sans-serif; font-size:12.5px; cursor:pointer; transition:all .22s; display:flex; align-items:center; gap:7px; }
   .tab-btn:hover { border-color:rgba(255,255,255,0.25); color:var(--text); }
   .tab-btn.active { background:var(--bg3); font-weight:500; }
 
@@ -107,14 +107,6 @@
   </div>
 </header>
 
-<div class="mustdo-bar">
-  <div class="mustdo-pill" style="border-color:rgba(200,104,58,0.3)"><span>🥾</span><strong>Santiago de Compostela</strong></div>
-  <div class="mustdo-pill" style="border-color:rgba(219,162,68,0.35)"><span>🚴</span><strong>Boucle Fisterra à vélo</strong></div>
-  <div class="mustdo-pill" style="border-color:rgba(74,127,217,0.3)"><span>🏆</span><strong>Arrivée Champs-Élysées</strong></div>
-  <div class="mustdo-pill" style="border-color:rgba(107,163,104,0.3)"><span>🏔</span><strong>GR20 intégral</strong></div>
-  <div class="mustdo-pill" style="border-color:rgba(63,181,176,0.3)"><span>⛵</span><strong>Semaine Glénans</strong></div>
-</div>
-
 <div class="schengen-block">
   <div class="schengen-header" onclick="toggleSchengen()">
     <div>
@@ -144,12 +136,12 @@
   </div>
 </div>
 
+<div class="tabs" id="tabs"></div>
+
 <div class="map-wrapper">
   <div id="map"></div>
   <div class="map-legend" id="map-legend"></div>
 </div>
-
-<div class="tabs" id="tabs"></div>
 
 <div class="timeline" id="timeline"></div>
 
@@ -164,11 +156,11 @@
 
 <script>
 const sections = [
-  {key:'pied', label:'Compostelle à pied', color:'var(--pied)'},
-  {key:'velo', label:'Compostelle à vélo', color:'var(--velo)'},
-  {key:'tdf',  label:'Tour de France 2029', color:'var(--tdf)'},
-  {key:'gr20', label:'GR20', color:'var(--gr20)'},
-  {key:'voile',label:'Voile Glénans', color:'var(--voile)'},
+  {key:'pied', label:'Compostelle à pied', color:'var(--pied)', icon:'🥾'},
+  {key:'velo', label:'Compostelle à vélo', color:'var(--velo)', icon:'🚴'},
+  {key:'tdf',  label:'Tour de France 2029', color:'var(--tdf)', icon:'🏆'},
+  {key:'gr20', label:'GR20', color:'var(--gr20)', icon:'🏔'},
+  {key:'voile',label:'Voile Glénans', color:'var(--voile)', icon:'⛵'},
 ];
 
 const stops = [
@@ -242,21 +234,11 @@ const stops = [
     desc:"Semaine de cours de voile avec l'école des Glénans, dans les falaises calcaires spectaculaires de Bonifacio.", tags:['voile','falaises']},
 ];
 
-function buildTimeline(){
+function buildTimeline(key){
   const container = document.getElementById('timeline');
-  let html = '';
-  let currentSection = null;
-  stops.forEach(s=>{
-    if(s.transit){
-      html += `<div class="stop"><div class="stop-left"><div class="dot"></div></div><div class="stop-card transit"><div class="stop-header"><div class="stop-name" style="font-size:15px;color:var(--text2)">${s.name}</div><span class="stop-days" style="background:transparent;color:var(--text3)">${s.days}</span></div><div class="stop-desc" style="margin-bottom:0">${s.desc}</div></div></div>`;
-      return;
-    }
-    if(s.section !== currentSection){
-      currentSection = s.section;
-      const meta = sections.find(x=>x.key===s.section);
-      html += `<div class="phase-label"><span class="ph-name" style="color:${meta.color}">${meta.label}</span></div>`;
-    }
-    const meta = sections.find(x=>x.key===s.section);
+  const meta = sections.find(x=>x.key===key);
+  let html = `<div class="phase-label"><span class="ph-name" style="color:${meta.color}">${meta.icon} ${meta.label}</span></div>`;
+  stops.filter(s=>s.section===key).forEach(s=>{
     html += `<div class="stop"><div class="stop-left"><div class="dot ${s.mustdo?'mustdo':''} ${s.loop?'loop':''}" style="border-color:${meta.color};${s.mustdo?`background:${meta.color}`:''}"></div></div>
       <div class="stop-card ${s.loop?'loop-card':''}">
         ${s.mustdo?`<div class="mustdo-badge" style="background:${meta.color}22;color:${meta.color};border:1px solid ${meta.color}44">${s.mustdoLabel}</div>`:''}
@@ -268,11 +250,10 @@ function buildTimeline(){
   });
   container.innerHTML = html;
 }
-buildTimeline();
 
 function buildTabs(){
   const container = document.getElementById('tabs');
-  container.innerHTML = sections.map(s=>`<button class="tab-btn" id="tab-${s.key}" onclick="show('${s.key}')">${s.label}</button>`).join('');
+  container.innerHTML = sections.map(s=>`<button class="tab-btn" id="tab-${s.key}" onclick="show('${s.key}')"><span>${s.icon}</span>${s.label}</button>`).join('');
 }
 buildTabs();
 
@@ -348,6 +329,8 @@ function show(key){
 
   const allCoords = sectionStops.map(s=>[s.lat,s.lng]).concat(loopStops.map(s=>[s.lat,s.lng]));
   map.fitBounds(L.latLngBounds(allCoords).pad(0.2));
+
+  buildTimeline(key);
 }
 
 show('pied');
